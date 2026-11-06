@@ -3,14 +3,12 @@
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { useInView, useReducedMotion } from "motion/react";
-import { IconBuildingBank, IconCheck } from "@tabler/icons-react";
+import { IconCheck } from "@tabler/icons-react";
 import { Button, GoogleAuthButton } from "@/components/ui/button";
 import {
   HERO_BG_IMG,
   HERO_ILLUSTRATION_IMG,
   PLATFORM_STATS,
-  PROMO_BUSINESS_IMG,
-  PROMO_EDUCATION_IMG,
 } from "@/lib/mock-data";
 
 const CIRCUIT_PATHS = [
@@ -236,138 +234,6 @@ export function PlatformStatsGrid() {
           </div>
         ))}
       </div>
-    </section>
-  );
-}
-
-interface PromoSectionCardProps {
-  badge?: string;
-  badgeIcon?: React.ReactNode;
-  title: string;
-  subtitle?: string;
-  bullets: string[];
-  ctaLabel: string;
-  ctaHref: string;
-  proofText: string;
-  imageUrl: string;
-  imageAlt: string;
-  imageWidth: number;
-  imageHeight: number;
-  reverse?: boolean;
-}
-
-function PromoSectionCard({
-  badge,
-  badgeIcon,
-  title,
-  subtitle,
-  bullets,
-  ctaLabel,
-  ctaHref,
-  proofText,
-  imageUrl,
-  imageAlt,
-  imageWidth,
-  imageHeight,
-  reverse,
-}: PromoSectionCardProps) {
-  return (
-    <article className="card-interactive overflow-hidden rounded-[12px] border border-line bg-bg2 md:pl-12">
-      {badge && (
-        <span className="inline-flex w-fit items-center gap-2.5 rounded-b-md bg-redsoft px-4 py-2.5 font-heading text-sm font-medium text-btn">
-          {badgeIcon}
-          <span>{badge}</span>
-        </span>
-      )}
-      <div
-        className={`flex flex-col items-center gap-8 px-5 md:flex-row md:px-0 ${
-          reverse ? "md:flex-row-reverse md:pr-10" : ""
-        }`}
-      >
-        <div className="flex flex-1 flex-col gap-5 py-8 md:py-14">
-          <h3 className="font-heading text-2xl font-medium text-ink sm:text-3xl">
-            {title}
-          </h3>
-          {subtitle && (
-            <p className="max-w-[510px] text-base leading-relaxed text-mute">
-              {subtitle}
-            </p>
-          )}
-          <ul className="flex list-disc flex-col gap-2 pl-5 text-base leading-relaxed text-mute">
-            {bullets.map((bullet) => (
-              <li key={bullet}>{bullet}</li>
-            ))}
-          </ul>
-          <div className="flex flex-col items-start gap-3 pt-2">
-            <Button variant="primary" href={ctaHref}>
-              {ctaLabel}
-            </Button>
-            <span className="flex items-center gap-2 text-sm font-medium text-mute">
-              <IconCheck
-                size={15}
-                stroke={3}
-                color="var(--ok)"
-                aria-hidden="true"
-              />
-              <span>{proofText}</span>
-            </span>
-          </div>
-        </div>
-        <figure className="flex flex-1 items-end justify-center pb-6 md:justify-end md:pb-10 md:pt-6">
-          <Image
-            src={imageUrl}
-            alt={imageAlt}
-            width={imageWidth}
-            height={imageHeight}
-            className="h-auto max-w-full rounded-lg object-contain"
-          />
-        </figure>
-      </div>
-    </article>
-  );
-}
-
-export function EnterpriseEducationPromos() {
-  return (
-    <section
-      id="solusi-industri"
-      className="mx-auto flex max-w-[1296px] flex-col gap-8 px-5 pb-20"
-    >
-      <PromoSectionCard
-        badge="BisaSiber untuk Korporasi & Tim TI"
-        title="Bangun ketahanan siber tim rekayasa & SOC perusahaan Anda"
-        subtitle="Latih tim keamanan siber dan developer Anda menghadapi serangan dunia nyata dengan metrik kesiapan yang terukur."
-        bullets={[
-          "Bangun budaya keamanan proaktif yang meningkatkan dan mempertahankan talenta siber terbaik.",
-          "Perkecil dampak insiden, percepat waktu mitigasi (MTTR), dan sajikan bukti kepatuhan yang diakui industri.",
-        ]}
-        ctaLabel="Jelajahi BisaSiber untuk Bisnis"
-        ctaHref="/dashboard"
-        proofText="Coba GRATIS bersama tim perusahaan Anda"
-        imageUrl={PROMO_BUSINESS_IMG}
-        imageAlt="Dashboard BisaSiber untuk Bisnis yang menampilkan matriks keahlian tim dan papan peringkat"
-        imageWidth={631}
-        imageHeight={420}
-      />
-
-      <PromoSectionCard
-        badge="BisaSiber untuk Pendidikan & Kampus"
-        badgeIcon={<IconBuildingBank size={18} aria-hidden="true" />}
-        title="Mengajar keamanan siber di kampus atau SMK?"
-        subtitle="Gunakan laboratorium virtual siap pakai pada platform yang disukai mahasiswa dan siswa Anda."
-        bullets={[
-          "Hemat waktu persiapan berminggu-minggu dan petakan silabus kuliah ke modul BisaSiber dalam hitungan menit.",
-          "Tugaskan lab praktik yang dapat disesuaikan, buat materi kustom, dan pantau progres setiap mahasiswa secara real-time.",
-          "Lingkungan praktik retas yang aman dan terisolasi, dapat diakses langsung dari browser tanpa instalasi rumit.",
-        ]}
-        ctaLabel="Jelajahi BisaSiber untuk Pendidikan"
-        ctaHref="/dashboard"
-        proofText="Dipercaya oleh universitas & komunitas siber di Indonesia"
-        imageUrl={PROMO_EDUCATION_IMG}
-        imageAlt="BisaSiber untuk Pendidikan menampilkan kurikulum kustom dan pemantauan kelas"
-        imageWidth={490}
-        imageHeight={360}
-      />
     </section>
   );
 }

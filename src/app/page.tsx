@@ -1,5 +1,4 @@
 import {
-  EnterpriseEducationPromos,
   HeroBanner,
   PlatformStatsGrid,
 } from "@/components/dashboard/stats-overview";
@@ -15,7 +14,6 @@ export default function HomePage() {
         <HeroBanner />
         <PlatformStatsGrid />
         <LearningPathsSection />
-        <EnterpriseEducationPromos />
         <FooterCta />
       </main>
       <Footer />
