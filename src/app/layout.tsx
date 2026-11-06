@@ -1,21 +1,6 @@
 import type { Metadata, Viewport } from "next";
-import { Ubuntu, Source_Sans_3 } from "next/font/google";
 import { QueryProvider } from "@/providers/query-provider";
 import "./globals.css";
-
-const ubuntu = Ubuntu({
-  subsets: ["latin"],
-  weight: ["400", "500", "700"],
-  variable: "--font-ubuntu",
-  display: "swap",
-});
-
-const sourceSans = Source_Sans_3({
-  subsets: ["latin"],
-  weight: ["400", "600", "700"],
-  variable: "--font-source-sans",
-  display: "swap",
-});
 
 export const viewport: Viewport = {
   themeColor: "#151C2B",
@@ -86,7 +71,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="id" className={`${ubuntu.variable} ${sourceSans.variable}`}>
+    <html lang="id">
       <body className="min-h-screen bg-[#F9F9FB] text-[#151C2B] antialiased">
         <QueryProvider>{children}</QueryProvider>
       </body>

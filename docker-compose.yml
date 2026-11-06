@@ -1,0 +1,67 @@
+services:
+  # Aplikasi Web Utama BisaSiber (Next.js + Bun)
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: bisasiber-web
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - DATABASE_URL=${DATABASE_URL:-postgresql://bisasiber:bisasiber_secret@postgres-local:5432/bisasiber}
+      - NEXT_PUBLIC_APP_URL=http://localhost:3000
+    depends_on:
+      postgres-local:
+        condition: service_healthy
+    networks:
+      - bisasiber-core-net
+    restart: unless-stopped
+
+  # Database PostgreSQL Lokal (Kompatibel untuk pengembangan lokal selain Neon Serverless)
+  postgres-local:
+    image: postgres:16-alpine
+    container_name: bisasiber-postgres
+    environment:
+      POSTGRES_USER: bisasiber
+      POSTGRES_PASSWORD: bisasiber_secret
+      POSTGRES_DB: bisasiber
+    ports:
+      - "5432:5432"
+    volumes:
+      - bisasiber_pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U bisasiber -d bisasiber"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - bisasiber-core-net
+    restart: unless-stopped
+
+  # Contoh Sandbox Container Lab Siber Terisolasi (Untuk Orkestrasi Lab Keamanan Siber)
+  lab-sandbox-template:
+    image: alpine:3.20
+    container_name: bisasiber-lab-sandbox
+    command: ["sh", "-c", "echo 'BISA{p0rt_ssh_22_aman}' > /tmp/flag.txt && sleep infinity"]
+    read_only: true
+    tmpfs:
+      - /tmp:size=32M,mode=1777
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    networks:
+      - bisasiber-lab-isolated-net
+    profiles:
+      - labs
+
+networks:
+  bisasiber-core-net:
+    driver: bridge
+  bisasiber-lab-isolated-net:
+    driver: bridge
+    internal: true
+
+volumes:
+  bisasiber_pgdata:
