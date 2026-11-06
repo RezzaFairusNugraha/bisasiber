@@ -1,5 +1,10 @@
 import Link from "next/link";
-import { IconShieldCheck } from "@tabler/icons-react";
+import {
+  IconArrowUpRight,
+  IconShieldCheck,
+  IconSparkles,
+  IconTerminal2,
+} from "@tabler/icons-react";
 import { BrandLogo } from "@/components/ui/brand-logo";
 import { Button, GoogleAuthButton } from "@/components/ui/button";
 
@@ -8,8 +13,7 @@ const footerColumns = [
     title: "Pembelajaran",
     links: [
       { label: "Lab Interaktif", href: "/lab" },
-      { label: "Untuk Bisnis", href: "/#solusi-industri" },
-      { label: "Untuk Universitas & Sekolah", href: "/#solusi-industri" },
+      { label: "Jalur Karier Siber", href: "/#jalur-belajar" },
       { label: "Kompetisi CTF", href: "/#jalur-belajar" },
       { label: "Sertifikasi Siber", href: "/dashboard" },
     ],
@@ -18,10 +22,8 @@ const footerColumns = [
     title: "Sumber Daya",
     links: [
       { label: "Tentang BisaSiber", href: "/" },
-      { label: "Ruang Berita", href: "/" },
-      { label: "Artikel & Blog", href: "/" },
+      { label: "Artikel & Riset Siber", href: "/" },
       { label: "Glosarium Keamanan", href: "/" },
-      { label: "Karier di Dunia Siber", href: "/#jalur-belajar" },
       { label: "Komunitas Discord", href: "/" },
     ],
   },
@@ -38,61 +40,101 @@ const footerColumns = [
     title: "Hubungi Kami",
     links: [
       { label: "Kontak Tim", href: "/" },
-      { label: "Program Mitra Kampus", href: "/" },
-      { label: "Diskon Pelajar & Mahasiswa", href: "/daftar" },
+      { label: "Mitra Komunitas", href: "/" },
+      { label: "Akses Pelajar & Mahasiswa", href: "/daftar" },
     ],
   },
 ];
 
 const decorativePixels = [
-  [4, 35, 20, 5, 0.2],
-  [14, 43, 6, 6, 0.32],
-  [24, 27, 5, 12, 0.28],
-  [34, 41, 18, 4, 0.24],
-  [44, 31, 7, 7, 0.45],
-  [54, 47, 22, 4, 0.22],
-  [64, 23, 5, 14, 0.35],
-  [74, 39, 8, 8, 0.26],
-  [84, 29, 20, 4, 0.48],
-  [92, 44, 12, 4, 0.3],
+  [4, 24, 20, 4, 0.22],
+  [16, 38, 6, 6, 0.35],
+  [28, 18, 5, 12, 0.28],
+  [39, 34, 18, 4, 0.24],
+  [51, 22, 7, 7, 0.45],
+  [63, 40, 22, 4, 0.22],
+  [75, 16, 5, 14, 0.35],
+  [86, 32, 16, 4, 0.42],
 ] as const;
 
 export function FooterCta() {
   return (
-    <section className="overflow-hidden border-t border-line bg-bg2 px-5 pt-16 md:pt-20">
-      <div className="mx-auto flex max-w-[963px] flex-col items-center gap-6 text-center text-ink">
-        <h2 className="max-w-[782px] font-heading text-2xl font-medium leading-snug tracking-wide sm:text-4xl sm:leading-[46px]">
-          Bergabunglah bersama 150.000+ pembelajar yang menguasai keamanan siber di BisaSiber
-        </h2>
-        <p className="max-w-[720px] text-base leading-relaxed text-mute sm:text-lg">
-          Mulai perjalanan siber Anda hari ini. Gratis langsung dari browser Anda, tanpa perlu pengalaman sebelumnya.
-        </p>
-        <div className="mt-2 flex flex-wrap items-center justify-center gap-4">
-          <Button variant="primary" href="/daftar" className="h-[38px]">
-            Daftar GRATIS
-          </Button>
-          <GoogleAuthButton />
-        </div>
-      </div>
+    <section className="px-5 pb-16 pt-4 md:pb-24">
+      <div className="card-interactive relative mx-auto max-w-[1320px] overflow-hidden rounded-3xl border border-line bg-bg2 p-8 sm:p-12 lg:p-14">
+        {/* Radial Red Soft Accent */}
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute -right-24 -top-24 h-80 w-80 rounded-full opacity-80 blur-3xl"
+          style={{
+            background:
+              "radial-gradient(circle, var(--redsoft) 0%, transparent 70%)",
+          }}
+        />
 
-      <div
-        aria-hidden="true"
-        className="relative mx-auto mt-14 h-[60px] max-w-[1320px] overflow-hidden"
-      >
-        {decorativePixels.map(([leftPct, top, width, height, opacity], idx) => (
-          <span
-            key={idx}
-            className="absolute hidden md:block"
-            style={{
-              left: `${leftPct}%`,
-              top,
-              width,
-              height,
-              opacity,
-              background: "var(--red)",
-            }}
-          />
-        ))}
+        <div className="relative z-10 grid grid-cols-1 items-center gap-10 lg:grid-cols-12">
+          <div className="flex flex-col items-start gap-4 lg:col-span-7">
+            <span className="inline-flex items-center gap-2 rounded-full border border-line bg-card px-3.5 py-1 font-mono text-xs font-semibold uppercase tracking-wider text-btn">
+              <IconSparkles size={14} />
+              Mulai Tanpa Instalasi Rumit
+            </span>
+            <h2 className="font-heading text-3xl font-bold leading-tight text-ink sm:text-4xl">
+              Siap Menguji Kemampuan Retas Etis &amp; Pertahanan Siber Anda?
+            </h2>
+            <p className="max-w-xl text-base leading-relaxed text-mute sm:text-lg">
+              Bergabunglah bersama 150.000+ pembelajar di Indonesia. Nyalakan mesin lab pertama Anda langsung di browser—gratis dan tanpa perlu pengalaman sebelumnya.
+            </p>
+            <div className="mt-2 flex flex-wrap items-center gap-3.5">
+              <Button variant="primary" href="/daftar" className="h-11 px-6">
+                <span>Buat Akun Gratis</span>
+                <IconArrowUpRight size={18} />
+              </Button>
+              <GoogleAuthButton />
+            </div>
+          </div>
+
+          {/* Kanan: Ringkasan Fitur Cepat */}
+          <div className="grid grid-cols-1 gap-3.5 sm:grid-cols-2 lg:col-span-5">
+            <div className="rounded-2xl border border-line bg-card p-5 shadow-2xs">
+              <IconTerminal2 size={24} className="text-btn" />
+              <h3 className="mt-3 font-heading text-base font-bold text-ink">
+                AttackBox Cloud Instan
+              </h3>
+              <p className="mt-1 text-xs leading-relaxed text-mute">
+                Terminal Linux siap pakai langsung di tab browser lengkap dengan Nmap, Curl, dan tools eksploitasi.
+              </p>
+            </div>
+            <div className="rounded-2xl border border-line bg-card p-5 shadow-2xs">
+              <IconShieldCheck size={24} className="text-ok" />
+              <h3 className="mt-3 font-heading text-base font-bold text-ink">
+                Validasi Flag Real-Time
+              </h3>
+              <p className="mt-1 text-xs leading-relaxed text-mute">
+                Kumpulkan poin XP dari setiap flag BISA&#123;...&#125; dan naikkan peringkat nasional Anda.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* Dekorasi Piksel Siber */}
+        <div
+          aria-hidden="true"
+          className="relative mt-8 h-[42px] w-full overflow-hidden border-t border-line/60 pt-4"
+        >
+          {decorativePixels.map(([leftPct, top, width, height, opacity], idx) => (
+            <span
+              key={idx}
+              className="absolute hidden md:block"
+              style={{
+                left: `${leftPct}%`,
+                top,
+                width,
+                height,
+                opacity,
+                background: "var(--red)",
+              }}
+            />
+          ))}
+        </div>
       </div>
     </section>
   );

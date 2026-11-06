@@ -130,7 +130,7 @@ export function DashboardOverview() {
               Lihat Semua (14)
             </Link>
           </div>
-          <div className="flex gap-4 overflow-x-auto pb-3">
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
             {recommendedRooms.map((room) => (
               <RoomCard key={room.id} room={room} />
             ))}
