@@ -24,14 +24,14 @@ export type ButtonProps = ButtonAsButton | ButtonAsLink;
 
 const variantClasses: Record<ButtonVariant, string> = {
   primary:
-    "border border-[#A3EA2A] bg-[#A3EA2A] text-[#151C2B] hover:bg-[#b5f04f] font-medium shadow-xs",
+    "border border-btn bg-btn text-onred hover:bg-red2 hover:border-red2 font-medium shadow-xs",
   outline:
-    "border border-[#A3EA2A] bg-transparent text-[#F9F9FB] hover:bg-white/10",
+    "border border-btn bg-transparent text-ink hover:bg-redsoft",
   secondary:
-    "border border-[#EEEFF2] bg-[#F9F9FB] text-[#151C2B] hover:bg-white",
-  ghost: "bg-transparent text-white/75 hover:text-white hover:bg-white/5",
+    "border border-line bg-bg2 text-ink hover:bg-card",
+  ghost: "bg-transparent text-mute hover:text-ink hover:bg-bg2",
   danger:
-    "border border-[#EB0037] bg-[#EB0037] text-white hover:bg-[#c8002f] font-medium",
+    "border border-hard bg-hard text-onred hover:bg-red2 font-medium",
 };
 
 const sizeClasses: Record<ButtonSize, string> = {
@@ -50,7 +50,7 @@ export function Button(props: ButtonProps) {
   } = props;
 
   const classes = cn(
-    "inline-flex items-center justify-center gap-2 font-heading transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#A3EA2A] disabled:pointer-events-none disabled:opacity-50 cursor-pointer",
+    "btn-interactive inline-flex items-center justify-center gap-2 font-heading focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50 cursor-pointer",
     variantClasses[variant],
     sizeClasses[size],
     className
@@ -66,7 +66,11 @@ export function Button(props: ButtonProps) {
 
   const buttonProps = rest as React.ButtonHTMLAttributes<HTMLButtonElement>;
   return (
-    <button type={buttonProps.type ?? "button"} className={classes} {...buttonProps}>
+    <button
+      type={buttonProps.type ?? "button"}
+      className={classes}
+      {...buttonProps}
+    >
       {children}
     </button>
   );
@@ -85,7 +89,7 @@ export function GoogleAuthButton({
     <Link
       href={href}
       className={cn(
-        "inline-flex h-[38px] items-center justify-center gap-2.5 rounded-[5px] bg-[#F9F9FB] px-5 font-heading text-base text-[#151C2B] transition-colors hover:bg-white shadow-xs",
+        "btn-interactive inline-flex h-[38px] items-center justify-center gap-2.5 rounded-[5px] border border-line bg-bg2 px-5 font-heading text-base text-ink hover:border-red hover:bg-card shadow-xs",
         className
       )}
     >

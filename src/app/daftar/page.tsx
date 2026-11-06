@@ -17,30 +17,30 @@ export const metadata: Metadata = {
 
 export default function RegisterPage() {
   return (
-    <div className="flex min-h-screen flex-col justify-between bg-[#151C2B] px-5 py-10 text-[#F9F9FB]">
+    <div className="flex min-h-screen flex-col justify-between bg-bg px-5 py-10 text-ink">
       <div className="mx-auto flex w-full max-w-[1200px] items-center justify-between">
-        <BrandLogo size="md" variant="dark" />
+        <BrandLogo size="md" />
         <Link
           href="/"
-          className="font-heading text-sm text-white/75 transition-colors hover:text-[#A3EA2A]"
+          className="font-heading text-sm text-mute transition-colors hover:text-btn"
         >
           ← Kembali ke Beranda
         </Link>
       </div>
 
-      <main className="mx-auto my-8 grid w-full max-w-[980px] grid-cols-1 overflow-hidden rounded-2xl border border-white/10 bg-[#1C2539] shadow-xl lg:grid-cols-12">
+      <main className="mx-auto my-8 grid w-full max-w-[980px] grid-cols-1 overflow-hidden rounded-2xl border border-line bg-card shadow-xl lg:grid-cols-12">
         {/* Panel Kiri: Keunggulan */}
-        <div className="flex flex-col justify-between bg-[#182031] p-8 lg:col-span-5">
+        <div className="flex flex-col justify-between border-b border-line bg-bg2 p-8 lg:col-span-5 lg:border-b-0 lg:border-r">
           <div>
-            <BrandLogo size="lg" variant="dark" />
-            <h1 className="mt-6 font-heading text-2xl font-bold leading-snug text-white">
+            <BrandLogo size="lg" />
+            <h1 className="mt-6 font-heading text-2xl font-bold leading-snug text-ink">
               Bangun Karier Keamanan Siber Anda dari Nol
             </h1>
-            <p className="mt-3 text-sm leading-relaxed text-white/70">
+            <p className="mt-3 text-sm leading-relaxed text-mute">
               Bergabunglah bersama ribuan talenta siber Indonesia dan akses ratusan laboratorium interaktif langsung di browser.
             </p>
 
-            <ul className="mt-6 space-y-3 text-sm text-white/85">
+            <ul className="mt-6 space-y-3 text-sm text-ink">
               {[
                 "Akses instan ke AttackBox & Lab Linux",
                 "Jalur karier terstruktur (Red Team, SOC, Cloud, AI)",
@@ -51,7 +51,7 @@ export default function RegisterPage() {
                   <IconCheck
                     size={18}
                     stroke={2.5}
-                    className="mt-0.5 shrink-0 text-[#A3EA2A]"
+                    className="mt-0.5 shrink-0 text-btn"
                   />
                   <span>{benefit}</span>
                 </li>
@@ -59,17 +59,17 @@ export default function RegisterPage() {
             </ul>
           </div>
 
-          <p className="mt-8 text-xs text-white/50">
+          <p className="mt-8 text-xs text-mute">
             Gratis selamanya untuk modul dasar. Tanpa perlu kartu kredit.
           </p>
         </div>
 
         {/* Panel Kanan: Formulir Pendaftaran */}
         <div className="p-6 sm:p-8 lg:col-span-7">
-          <h2 className="font-heading text-xl font-bold text-white">
+          <h2 className="font-heading text-xl font-bold text-ink">
             Buat Akun BisaSiber Gratis
           </h2>
-          <p className="mt-1 text-sm text-white/70">
+          <p className="mt-1 text-sm text-mute">
             Isi data di bawah ini untuk langsung memulai modul pertama Anda.
           </p>
 
@@ -82,25 +82,25 @@ export default function RegisterPage() {
           </div>
 
           <div className="my-5 flex items-center gap-3">
-            <div className="h-px flex-1 bg-white/10" />
-            <span className="text-xs uppercase tracking-wider text-white/50">
+            <div className="h-px flex-1 bg-line" />
+            <span className="text-xs uppercase tracking-wider text-mute">
               atau daftar dengan email
             </span>
-            <div className="h-px flex-1 bg-white/10" />
+            <div className="h-px flex-1 bg-line" />
           </div>
 
           <form action="/dashboard" className="flex flex-col gap-4">
             <div>
               <label
                 htmlFor="fullName"
-                className="mb-1.5 block font-heading text-xs font-medium text-white/85"
+                className="mb-1.5 block font-heading text-xs font-medium text-ink"
               >
                 Nama Lengkap / Username Siber
               </label>
               <div className="relative">
                 <IconUser
                   size={18}
-                  className="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 text-white/45"
+                  className="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 text-mute"
                 />
                 <input
                   id="fullName"
@@ -108,7 +108,7 @@ export default function RegisterPage() {
                   type="text"
                   required
                   placeholder="Pratama Siber"
-                  className="h-11 w-full rounded-lg border border-white/15 bg-[#151C2B] pl-10 pr-4 text-sm text-white placeholder:text-white/35 focus:border-[#A3EA2A] focus:outline-none"
+                  className="h-11 w-full rounded-lg border border-line bg-bg pl-10 pr-4 text-sm text-ink placeholder:text-mute focus:border-btn focus:outline-none"
                 />
               </div>
             </div>
@@ -116,14 +116,14 @@ export default function RegisterPage() {
             <div>
               <label
                 htmlFor="email"
-                className="mb-1.5 block font-heading text-xs font-medium text-white/85"
+                className="mb-1.5 block font-heading text-xs font-medium text-ink"
               >
                 Alamat Email Aktif
               </label>
               <div className="relative">
                 <IconMail
                   size={18}
-                  className="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 text-white/45"
+                  className="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 text-mute"
                 />
                 <input
                   id="email"
@@ -131,7 +131,7 @@ export default function RegisterPage() {
                   type="email"
                   required
                   placeholder="nama@kampus.ac.id"
-                  className="h-11 w-full rounded-lg border border-white/15 bg-[#151C2B] pl-10 pr-4 text-sm text-white placeholder:text-white/35 focus:border-[#A3EA2A] focus:outline-none"
+                  className="h-11 w-full rounded-lg border border-line bg-bg pl-10 pr-4 text-sm text-ink placeholder:text-mute focus:border-btn focus:outline-none"
                 />
               </div>
             </div>
@@ -139,14 +139,14 @@ export default function RegisterPage() {
             <div>
               <label
                 htmlFor="password"
-                className="mb-1.5 block font-heading text-xs font-medium text-white/85"
+                className="mb-1.5 block font-heading text-xs font-medium text-ink"
               >
                 Kata Sandi Minimal 8 Karakter
               </label>
               <div className="relative">
                 <IconLock
                   size={18}
-                  className="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 text-white/45"
+                  className="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 text-mute"
                 />
                 <input
                   id="password"
@@ -154,7 +154,7 @@ export default function RegisterPage() {
                   type="password"
                   required
                   placeholder="••••••••"
-                  className="h-11 w-full rounded-lg border border-white/15 bg-[#151C2B] pl-10 pr-4 text-sm text-white placeholder:text-white/35 focus:border-[#A3EA2A] focus:outline-none"
+                  className="h-11 w-full rounded-lg border border-line bg-bg pl-10 pr-4 text-sm text-ink placeholder:text-mute focus:border-btn focus:outline-none"
                 />
               </div>
             </div>
@@ -164,11 +164,11 @@ export default function RegisterPage() {
             </Button>
           </form>
 
-          <p className="mt-5 text-center text-sm text-white/70">
+          <p className="mt-5 text-center text-sm text-mute">
             Sudah punya akun?{" "}
             <Link
               href="/masuk"
-              className="font-semibold text-[#A3EA2A] hover:underline"
+              className="font-semibold text-btn hover:underline"
             >
               Masuk di sini
             </Link>
@@ -176,7 +176,7 @@ export default function RegisterPage() {
         </div>
       </main>
 
-      <div className="mx-auto text-center text-xs text-white/50">
+      <div className="mx-auto text-center text-xs text-mute">
         © {new Date().getFullYear()} BisaSiber Indonesia — Platform Belajar Teknologi & Siber Interaktif
       </div>
     </div>

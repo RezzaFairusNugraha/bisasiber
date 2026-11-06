@@ -4,9 +4,9 @@ const difficultyConfig: Record<
   Difficulty,
   { label: string; color: string; bars: number }
 > = {
-  easy: { label: "Mudah", color: "#26890C", bars: 1 },
-  intermediate: { label: "Menengah", color: "#FF8A00", bars: 2 },
-  hard: { label: "Sulit", color: "#EB0037", bars: 3 },
+  easy: { label: "Mudah", color: "var(--ok)", bars: 1 },
+  intermediate: { label: "Menengah", color: "var(--mid)", bars: 2 },
+  hard: { label: "Sulit", color: "var(--hard)", bars: 3 },
 };
 
 export function DifficultyBadge({ level }: { level: Difficulty }) {
@@ -21,7 +21,7 @@ export function DifficultyBadge({ level }: { level: Difficulty }) {
         width="14"
         height="14"
         viewBox="0 0 14 14"
-        fill={color}
+        fill="currentColor"
         aria-hidden="true"
       >
         {[0, 1, 2, 3].map((i) => {

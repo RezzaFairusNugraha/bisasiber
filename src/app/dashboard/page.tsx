@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 
 export default function DashboardPage() {
   return (
-    <div className="flex min-h-screen flex-col bg-[#F9F9FB]">
+    <div className="flex min-h-screen flex-col bg-bg">
       <div className="flex flex-1 flex-col lg:flex-row">
         <Sidebar />
         <main className="flex flex-1 flex-col">

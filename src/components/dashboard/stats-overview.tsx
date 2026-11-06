@@ -1,4 +1,8 @@
+"use client";
+
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
+import { useInView, useReducedMotion } from "motion/react";
 import { IconBuildingBank, IconCheck } from "@tabler/icons-react";
 import { Button, GoogleAuthButton } from "@/components/ui/button";
 import {
@@ -9,35 +13,102 @@ import {
   PROMO_EDUCATION_IMG,
 } from "@/lib/mock-data";
 
+const CIRCUIT_PATHS = [
+  {
+    d: "M 48 92 L 210 92 L 252 50 L 520 50",
+    ring: { cx: 40, cy: 92 },
+    speedClass: "circuit-glow-fast",
+  },
+  {
+    d: "M 120 128 L 360 128 L 402 86 L 780 86 L 822 44 L 1120 44",
+    ring: { cx: 112, cy: 128 },
+    speedClass: "circuit-glow-slow",
+  },
+  {
+    d: "M 640 134 L 910 134 L 952 92 L 1265 92",
+    ring: { cx: 1273, cy: 92 },
+    speedClass: "circuit-glow-fast",
+  },
+] as const;
+
 export function HeroBanner() {
   return (
-    <section className="relative overflow-hidden bg-[#151C2B]">
+    <section className="relative overflow-hidden bg-bg">
+      {/* Radial glow of var(--redsoft) fading to transparent (Step 2) */}
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-x-0 bottom-[-280px] h-[480px] rounded-[100px] opacity-90 blur-[100px]"
         style={{
           background:
-            "radial-gradient(198% 52% at 50% 50%, #1C4DA9 0%, rgba(28,77,169,0) 70%)",
+            "radial-gradient(198% 52% at 50% 50%, var(--redsoft) 0%, transparent 70%)",
         }}
       />
+
       <Image
         src={HERO_BG_IMG}
         alt=""
         fill
         priority
         aria-hidden="true"
-        className="pointer-events-none object-cover opacity-55"
+        className="pointer-events-none object-cover opacity-15"
       />
-      <div className="relative mx-auto flex max-w-[1320px] flex-col items-center justify-between gap-12 px-5 pb-20 pt-14 md:pb-36 md:pt-28 lg:flex-row lg:items-start">
+
+      {/* Soft red scan line drifting down over the hero background grid (Step 4.7) */}
+      <div
+        aria-hidden="true"
+        className="hero-scanline pointer-events-none absolute inset-x-0 top-0 h-[140px]"
+      />
+
+      {/* Decorative circuit traces at the bottom of the hero (Step 4.6) */}
+      <svg
+        aria-hidden="true"
+        viewBox="0 0 1320 160"
+        fill="none"
+        preserveAspectRatio="none"
+        className="pointer-events-none absolute inset-x-0 bottom-0 z-0 h-[140px] w-full"
+      >
+        {CIRCUIT_PATHS.map((item, idx) => (
+          <g key={idx}>
+            <path
+              d={item.d}
+              stroke="var(--red)"
+              strokeOpacity="0.28"
+              strokeWidth="2.2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+            <path
+              d={item.d}
+              pathLength={1000}
+              stroke="var(--red)"
+              strokeWidth="2.6"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className={item.speedClass}
+            />
+            <circle
+              cx={item.ring.cx}
+              cy={item.ring.cy}
+              r="6"
+              stroke="var(--red)"
+              strokeWidth="2.5"
+              fill="var(--bg)"
+              className="circuit-ring-pulse"
+            />
+          </g>
+        ))}
+      </svg>
+
+      <div className="relative z-10 mx-auto flex max-w-[1320px] flex-col items-center justify-between gap-12 px-5 pb-20 pt-14 md:pb-36 md:pt-28 lg:flex-row lg:items-start">
         <div className="flex w-full max-w-[680px] flex-col">
-          <span className="mb-4 inline-flex w-fit items-center gap-2 rounded-full border border-[#A3EA2A]/40 bg-[#A3EA2A]/10 px-3.5 py-1 font-heading text-xs font-medium text-[#A3EA2A]">
+          <span className="mb-4 inline-flex w-fit items-center gap-2 rounded-full border border-line bg-redsoft px-3.5 py-1 font-heading text-xs font-medium text-btn">
             Platform Belajar Teknologi & Keamanan Siber #1 Indonesia
           </span>
-          <h1 className="font-heading text-4xl font-medium leading-[1.08] text-[#F9F9FB] sm:text-[54px] sm:leading-[54px]">
+          <h1 className="font-heading text-4xl font-medium leading-[1.08] text-ink sm:text-[54px] sm:leading-[54px]">
             Siapa pun bisa belajar keamanan siber bersama{" "}
-            <span className="text-[#A3EA2A]">BisaSiber</span>
+            <span className="text-btn">BisaSiber</span>
           </h1>
-          <p className="mt-5 text-lg leading-relaxed text-[#EEEFF2] sm:text-2xl sm:leading-[35px]">
+          <p className="mt-5 text-lg leading-relaxed text-mute sm:text-2xl sm:leading-[35px]">
             Pelatihan keamanan siber & teknologi interaktif melalui skenario dunia nyata langsung dari browser Anda.
           </p>
           <div className="flex flex-wrap items-center gap-4 pb-7 pt-10">
@@ -48,12 +119,12 @@ export function HeroBanner() {
             <Button
               variant="outline"
               href="/lab"
-              className="h-[38px] border-white/25 text-white hover:bg-white/10"
+              className="h-[38px]"
             >
               Coba Lab Sekarang
             </Button>
           </div>
-          <ul className="flex flex-wrap gap-x-6 gap-y-3 text-base text-[#EEEFF2]">
+          <ul className="flex flex-wrap gap-x-6 gap-y-3 text-base text-mute">
             {[
               "Ramah untuk pemula",
               "Panduan langkah demi langkah & tantangan CTF",
@@ -63,7 +134,7 @@ export function HeroBanner() {
                 <IconCheck
                   size={16}
                   stroke={3}
-                  color="#A3EA2A"
+                  color="var(--btn)"
                   aria-hidden="true"
                 />
                 <span>{item}</span>
@@ -87,22 +158,79 @@ export function HeroBanner() {
   );
 }
 
+function CountUpStatValue({
+  rawValue,
+  inView,
+}: {
+  rawValue: string;
+  inView: boolean;
+}) {
+  const prefersReducedMotion = useReducedMotion();
+  const [displayValue, setDisplayValue] = useState(rawValue);
+
+  useEffect(() => {
+    const match = rawValue.match(/^([\d.]+)(.*)$/);
+    if (!match || !inView || prefersReducedMotion) {
+      setDisplayValue(rawValue);
+      return;
+    }
+
+    const numericPart = match[1];
+    const suffix = match[2] ?? "";
+    const hasDotSeparator = numericPart.includes(".");
+    const targetNumber = parseInt(numericPart.replace(/\./g, ""), 10);
+
+    if (Number.isNaN(targetNumber)) {
+      setDisplayValue(rawValue);
+      return;
+    }
+
+    const duration = 1200;
+    const startTime = performance.now();
+    let frameId = 0;
+
+    const tick = (now: number) => {
+      const elapsed = now - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      const current = Math.round(targetNumber * eased);
+      const formatted = hasDotSeparator
+        ? current.toLocaleString("id-ID")
+        : String(current);
+      setDisplayValue(`${formatted}${suffix}`);
+
+      if (progress < 1) {
+        frameId = requestAnimationFrame(tick);
+      }
+    };
+
+    frameId = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(frameId);
+  }, [inView, prefersReducedMotion, rawValue]);
+
+  return <>{displayValue}</>;
+}
+
 export function PlatformStatsGrid() {
+  const sectionRef = useRef<HTMLElement | null>(null);
+  const inView = useInView(sectionRef, { once: true, amount: 0.35 });
+
   return (
     <section
+      ref={sectionRef}
       aria-label="Statistik Platform BisaSiber"
-      className="border-b border-[#E4ECDA] bg-[#F8FDEE] px-5 py-8"
+      className="border-y border-line bg-redsoft px-5 py-8"
     >
       <div className="mx-auto grid max-w-[1320px] grid-cols-2 gap-6 lg:grid-cols-4 lg:gap-8">
         {PLATFORM_STATS.map((stat) => (
           <div
             key={stat.value}
-            className="flex flex-col items-center gap-1 text-center text-[#151C2B]"
+            className="flex flex-col items-center gap-1 text-center text-ink"
           >
             <div className="font-heading text-2xl font-bold leading-tight tracking-tight sm:text-[32px]">
-              {stat.value}
+              <CountUpStatValue rawValue={stat.value} inView={inView} />
             </div>
-            <div className="text-sm leading-relaxed text-[#151C2B]/75 sm:text-base">
+            <div className="text-sm leading-relaxed text-mute sm:text-base">
               {stat.label}
             </div>
           </div>
@@ -144,9 +272,9 @@ function PromoSectionCard({
   reverse,
 }: PromoSectionCardProps) {
   return (
-    <article className="overflow-hidden rounded-[12px] border border-[#E3EDD6] bg-[#F6FAF0] md:pl-12">
+    <article className="card-interactive overflow-hidden rounded-[12px] border border-line bg-bg2 md:pl-12">
       {badge && (
-        <span className="inline-flex w-fit items-center gap-2.5 rounded-b-md bg-[#E9F3E7] px-4 py-2.5 font-heading text-sm font-medium text-[#26890C]">
+        <span className="inline-flex w-fit items-center gap-2.5 rounded-b-md bg-redsoft px-4 py-2.5 font-heading text-sm font-medium text-btn">
           {badgeIcon}
           <span>{badge}</span>
         </span>
@@ -157,15 +285,15 @@ function PromoSectionCard({
         }`}
       >
         <div className="flex flex-1 flex-col gap-5 py-8 md:py-14">
-          <h3 className="font-heading text-2xl font-medium text-[#151C2B] sm:text-3xl">
+          <h3 className="font-heading text-2xl font-medium text-ink sm:text-3xl">
             {title}
           </h3>
           {subtitle && (
-            <p className="max-w-[510px] text-base leading-relaxed text-[#525A6A]">
+            <p className="max-w-[510px] text-base leading-relaxed text-mute">
               {subtitle}
             </p>
           )}
-          <ul className="flex list-disc flex-col gap-2 pl-5 text-base leading-relaxed text-[#525A6A]">
+          <ul className="flex list-disc flex-col gap-2 pl-5 text-base leading-relaxed text-mute">
             {bullets.map((bullet) => (
               <li key={bullet}>{bullet}</li>
             ))}
@@ -174,8 +302,13 @@ function PromoSectionCard({
             <Button variant="primary" href={ctaHref}>
               {ctaLabel}
             </Button>
-            <span className="flex items-center gap-2 text-sm font-medium text-[#525A6A]">
-              <IconCheck size={15} stroke={3} color="#26890C" aria-hidden="true" />
+            <span className="flex items-center gap-2 text-sm font-medium text-mute">
+              <IconCheck
+                size={15}
+                stroke={3}
+                color="var(--ok)"
+                aria-hidden="true"
+              />
               <span>{proofText}</span>
             </span>
           </div>

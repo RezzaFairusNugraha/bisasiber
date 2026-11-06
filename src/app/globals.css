@@ -1,22 +1,296 @@
 @import "tailwindcss";
 
-@theme {
-  --font-heading: "Ubuntu", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  --font-sans: "Source Sans 3", "Inter", system-ui, -apple-system, sans-serif;
+:root {
+  --bg: #FFFFFF;
+  --bg2: #FFF5F5;
+  --ink: #1D1115;
+  --mute: #6B5A60;
+  --line: #F0DCDC;
+  --red: #FD0002;
+  --btn: #E50002;
+  --red2: #BF0002;
+  --redsoft: #FFE8E8;
+  --onred: #FFFFFF;
+  --card: #FFFFFF;
+  --term: #1D1115;
+  --termfg: #F6E9EB;
+  --ok: #1E8A4C;
+  --mid: #D98200;
+  --hard: #FD0002;
 }
 
-:root {
-  --background: #f9f9fb;
-  --foreground: #151c2b;
-  --brand-navy: #151c2b;
-  --brand-lime: #a3ea2a;
+[data-theme="dark"] {
+  --bg: #150C10;
+  --bg2: #1D1217;
+  --ink: #F7ECEE;
+  --mute: #B09CA2;
+  --line: #35222A;
+  --red: #FF2A2E;
+  --btn: #FF2A2E;
+  --red2: #FF5558;
+  --redsoft: #3A1014;
+  --onred: #1B0A0F;
+  --card: #1D1217;
+  --term: #0C0609;
+  --termfg: #F6E9EB;
+  --ok: #4FD38A;
+  --mid: #FFB23E;
+  --hard: #FF2A2E;
+}
+
+@theme inline {
+  --font-heading: "Ubuntu", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-sans: "Source Sans 3", "Inter", system-ui, -apple-system, sans-serif;
+
+  --color-bg: var(--bg);
+  --color-bg2: var(--bg2);
+  --color-ink: var(--ink);
+  --color-mute: var(--mute);
+  --color-line: var(--line);
+  --color-red: var(--red);
+  --color-btn: var(--btn);
+  --color-red2: var(--red2);
+  --color-redsoft: var(--redsoft);
+  --color-onred: var(--onred);
+  --color-card: var(--card);
+  --color-term: var(--term);
+  --color-termfg: var(--termfg);
+  --color-ok: var(--ok);
+  --color-mid: var(--mid);
+  --color-hard: var(--hard);
 }
 
 body {
-  background-color: var(--background);
-  color: var(--foreground);
+  background-color: var(--bg);
+  color: var(--ink);
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
+}
+
+/* Global color transitions (Step 4.2) */
+body,
+header,
+aside,
+footer,
+section,
+article,
+nav,
+button,
+a,
+input,
+.theme-surface {
+  transition:
+    background-color 0.4s ease,
+    border-color 0.4s ease,
+    color 0.4s ease,
+    box-shadow 0.3s ease,
+    transform 0.25s ease;
+}
+
+/* Visible keyboard focus (Step 4.10) */
+:focus-visible {
+  outline: 3px solid var(--red) !important;
+  outline-offset: 2px;
+}
+
+/* View Transition Circle Expand (Step 4.1) */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+::view-transition-new(root) {
+  animation: theme-circle-expand 650ms ease-in-out forwards;
+}
+
+@keyframes theme-circle-expand {
+  from {
+    clip-path: circle(0px at var(--x, 50%) var(--y, 50%));
+  }
+  to {
+    clip-path: circle(150% at var(--x, 50%) var(--y, 50%));
+  }
+}
+
+/* Button hover lift + soft red shadow & active press (Step 4.3) */
+.btn-interactive {
+  transition:
+    transform 0.22s ease,
+    box-shadow 0.22s ease,
+    background-color 0.4s ease,
+    border-color 0.4s ease,
+    color 0.4s ease;
+}
+
+.btn-interactive:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px -6px color-mix(in srgb, var(--red) 45%, transparent);
+}
+
+.btn-interactive:active {
+  transform: scale(0.98);
+}
+
+/* RoomCard & interactive card hover (Step 4.4) */
+.card-interactive {
+  transition:
+    transform 0.28s cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 0.3s ease,
+    box-shadow 0.3s ease,
+    background-color 0.4s ease;
+}
+
+.card-interactive:hover {
+  transform: translateY(-6px);
+  border-color: var(--red) !important;
+  box-shadow: 0 18px 36px -22px var(--red);
+}
+
+/* Command chips lift on hover and fill with var(--red) (Step 4.5) */
+.cmd-chip {
+  transition:
+    transform 0.2s ease,
+    background-color 0.25s ease,
+    border-color 0.25s ease,
+    color 0.25s ease;
+}
+
+.cmd-chip:hover {
+  transform: translateY(-2px);
+  background-color: var(--red) !important;
+  border-color: var(--red) !important;
+  color: var(--onred) !important;
+}
+
+/* Logo white shine sweep every ~5s on red layer (Step 3.3) */
+.logo-red-shine {
+  background-color: var(--red);
+  background-image: linear-gradient(
+    105deg,
+    transparent 35%,
+    rgba(255, 255, 255, 0.72) 50%,
+    transparent 65%
+  );
+  background-size: 260% 100%;
+  background-repeat: no-repeat;
+  animation: logo-shine-sweep 5s ease-in-out infinite;
+  transition: background-color 0.4s ease;
+}
+
+@keyframes logo-shine-sweep {
+  0%,
+  70% {
+    background-position: 140% 0;
+  }
+  100% {
+    background-position: -60% 0;
+  }
+}
+
+/* Hero circuit traces dash animation & ring pulse (Step 4.6) */
+.circuit-glow-fast {
+  stroke-dasharray: 36 964;
+  filter: drop-shadow(0 0 6px var(--red));
+  animation: circuit-dash 4.5s linear infinite;
+}
+
+.circuit-glow-slow {
+  stroke-dasharray: 36 964;
+  filter: drop-shadow(0 0 6px var(--red));
+  animation: circuit-dash 6.5s linear infinite;
+}
+
+@keyframes circuit-dash {
+  from {
+    stroke-dashoffset: 0;
+  }
+  to {
+    stroke-dashoffset: -1000;
+  }
+}
+
+.circuit-ring-pulse {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: ring-pulse 2.4s ease-in-out infinite;
+}
+
+@keyframes ring-pulse {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.75;
+  }
+  50% {
+    transform: scale(1.4);
+    opacity: 1;
+  }
+}
+
+/* Hero soft red scan line drifting down every 7s (Step 4.7) */
+.hero-scanline {
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    var(--redsoft) 50%,
+    transparent 100%
+  );
+  animation: scanline-drift 7s linear infinite;
+}
+
+@keyframes scanline-drift {
+  0% {
+    transform: translateY(-160px);
+    opacity: 0;
+  }
+  15% {
+    opacity: 0.55;
+  }
+  85% {
+    opacity: 0.55;
+  }
+  100% {
+    transform: translateY(680px);
+    opacity: 0;
+  }
+}
+
+/* Blinking terminal caret (Step 4.5) */
+.terminal-caret {
+  display: inline-block;
+  width: 7px;
+  height: 14px;
+  vertical-align: middle;
+  background-color: var(--red);
+  animation: caret-blink 1s steps(2, start) infinite;
+}
+
+@keyframes caret-blink {
+  to {
+    visibility: hidden;
+  }
+}
+
+/* Respect prefers-reduced-motion (Step 4.10) */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after,
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .btn-interactive:hover,
+  .btn-interactive:active,
+  .card-interactive:hover,
+  .cmd-chip:hover {
+    transform: none !important;
+  }
 }
 
 ::-webkit-scrollbar {
@@ -29,10 +303,10 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(82, 90, 106, 0.3);
+  background: color-mix(in srgb, var(--mute) 35%, transparent);
   border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(82, 90, 106, 0.5);
+  background: color-mix(in srgb, var(--mute) 55%, transparent);
 }

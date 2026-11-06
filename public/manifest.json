@@ -4,8 +4,8 @@
   "description": "Platform pembelajaran teknologi dan keamanan siber interaktif berbasis skenario dunia nyata di Indonesia.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#151C2B",
-  "theme_color": "#A3EA2A",
+  "background_color": "#FFFFFF",
+  "theme_color": "#FD0002",
   "icons": [
     {
       "src": "/logo.png",

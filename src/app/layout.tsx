@@ -1,9 +1,13 @@
 import type { Metadata, Viewport } from "next";
 import { QueryProvider } from "@/providers/query-provider";
+import { ThemeProvider } from "@/providers/theme-provider";
 import "./globals.css";
 
 export const viewport: Viewport = {
-  themeColor: "#151C2B",
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#FFFFFF" },
+    { media: "(prefers-color-scheme: dark)", color: "#150C10" },
+  ],
   width: "device-width",
   initialScale: 1,
 };
@@ -71,9 +75,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="id">
-      <body className="min-h-screen bg-[#F9F9FB] text-[#151C2B] antialiased">
-        <QueryProvider>{children}</QueryProvider>
+    <html lang="id" suppressHydrationWarning>
+      <body className="min-h-screen bg-bg text-ink antialiased">
+        <ThemeProvider>
+          <QueryProvider>{children}</QueryProvider>
+        </ThemeProvider>
       </body>
     </html>
   );
