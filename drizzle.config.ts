@@ -1,14 +1,13 @@
 import "dotenv/config";
-import { createDrizzleConfig } from "@agent-native/core/db/drizzle-config";
+import { defineConfig } from "drizzle-kit";
 
-export default createDrizzleConfig({
-  schema: "./drizzle/schema.ts",
-  out: "./drizzle/migrations",
+export default defineConfig({
+  out: "./drizzle",
+  schema: "./src/db/schema.ts",
   dialect: "postgresql",
-  url:
-    // config-ok: drizzle-kit loads this file outside the app runtime, and
-    // migrations need the host's direct (unpooled) connection.
-    process.env.DATABASE_URL_UNPOOLED ||
-    // config-ok: Netlify DB's name for the same direct connection.
-    process.env.NETLIFY_DATABASE_URL_UNPOOLED,
+  dbCredentials: {
+    url:
+      process.env.DATABASE_URL ||
+      "postgresql://user:password@ep-placeholder.ap-southeast-1.aws.neon.tech/bisasiber?sslmode=require",
+  },
 });
