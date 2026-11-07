@@ -2,12 +2,7 @@
 
 import { useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
-import {
-  IconAdjustmentsHorizontal,
-  IconCompass,
-  IconSearch,
-  IconSparkles,
-} from "@tabler/icons-react";
+import { IconSearch } from "@tabler/icons-react";
 import { RoomCard } from "@/components/rooms/room-card";
 import { useRooms } from "@/hooks/use-rooms";
 import { EXPERIENCE_FILTERS, TOPIC_FILTERS } from "@/lib/mock-data";
@@ -32,58 +27,41 @@ export function LearningPathsSection() {
   return (
     <section
       id="jalur-belajar"
-      className="mx-auto flex max-w-[1320px] flex-col gap-8 px-5 py-16 md:py-24"
+      className="mx-auto flex max-w-[1200px] flex-col gap-8 px-5 py-16 md:py-24"
     >
-      {/* Header Eksplorasi Kurikulum (Bento Asymmetric Header) */}
-      <div className="flex flex-col items-start justify-between gap-6 border-b border-line pb-8 lg:flex-row lg:items-end">
-        <div className="max-w-2xl">
-          <span className="inline-flex items-center gap-2 rounded-full border border-line bg-redsoft px-3.5 py-1 font-mono text-xs font-semibold uppercase tracking-wider text-btn">
-            <IconCompass size={15} />
-            Kurikulum Terstruktur &amp; Praktis
-          </span>
-          <h2 className="mt-3 font-heading text-3xl font-bold leading-tight text-ink sm:text-4xl">
-            Eksplorasi Jalur Karier &amp; Modul Lab Siber
+      <div className="flex flex-col items-start justify-between gap-6 lg:flex-row lg:items-end">
+        <div className="max-w-xl">
+          <h2 className="font-heading text-2xl font-bold leading-tight text-ink sm:text-3xl">
+            Kurikulum &amp; Modul Praktik
           </h2>
-          <p className="mt-2.5 text-base leading-relaxed text-mute">
-            Dirancang khusus untuk kebutuhan industri keamanan siber Indonesia—mulai dari dasar jaringan hingga operasi Red Team dan pengamanan AI.
+          <p className="mt-2 text-base leading-relaxed text-mute">
+            Pilih jalur sesuai spesialisasi peran atau tingkat pengalaman Anda saat ini.
           </p>
         </div>
 
-        {/* Search Input & Counter */}
-        <div className="flex w-full flex-col gap-3 sm:w-auto sm:flex-row sm:items-center">
-          <div className="relative w-full sm:w-80">
-            <IconSearch
-              size={18}
-              className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-mute"
-            />
-            <input
-              type="search"
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-              placeholder="Cari modul, CVE, atau topik..."
-              aria-label="Cari modul atau topik siber"
-              className="h-11 w-full rounded-xl border border-line bg-card pl-11 pr-4 text-sm text-ink shadow-2xs placeholder:text-mute focus:border-btn focus:outline-none"
-            />
-          </div>
-          <div className="hidden items-center gap-1.5 rounded-xl border border-line bg-bg2 px-3.5 py-2.5 font-mono text-xs font-semibold text-ink sm:inline-flex">
-            <IconSparkles size={15} className="text-btn" />
-            <span>{rooms.length} Modul</span>
-          </div>
+        <div className="relative w-full sm:w-72">
+          <IconSearch
+            size={16}
+            className="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 text-mute"
+          />
+          <input
+            type="search"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            placeholder="Cari modul..."
+            aria-label="Cari modul atau topik siber"
+            className="h-10 w-full rounded-lg border border-line bg-card pl-9 pr-3.5 text-sm text-ink placeholder:text-mute focus:border-btn focus:outline-none"
+          />
         </div>
       </div>
 
-      {/* Unified Dual-Control Filter Bar (Berbeda dari layout sidebar TryHackMe) */}
-      <div className="flex flex-col justify-between gap-4 rounded-2xl border border-line bg-bg2 p-4 lg:flex-row lg:items-center">
-        {/* Spesialisasi Peran */}
+      {/* Minimal Filter Bar */}
+      <div className="flex flex-col justify-between gap-4 border-b border-line pb-4 lg:flex-row lg:items-center">
         <div
           role="tablist"
           aria-label="Filter Spesialisasi Peran"
-          className="flex flex-wrap items-center gap-2"
+          className="flex flex-wrap items-center gap-1.5"
         >
-          <span className="mr-1 inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-mute">
-            <IconAdjustmentsHorizontal size={15} className="text-btn" />
-            Peran:
-          </span>
           {TOPIC_FILTERS.map((topic) => (
             <button
               key={topic}
@@ -91,10 +69,10 @@ export function LearningPathsSection() {
               role="tab"
               aria-selected={category === topic}
               onClick={() => setCategory(topic)}
-              className={`btn-interactive cursor-pointer rounded-xl px-3.5 py-2 font-heading text-xs sm:text-sm transition-colors ${
+              className={`cursor-pointer rounded-md px-3 py-1.5 font-heading text-xs sm:text-sm transition-colors ${
                 category === topic
-                  ? "bg-btn font-semibold text-onred shadow-xs"
-                  : "border border-line bg-card text-ink hover:bg-redsoft"
+                  ? "bg-btn font-medium text-onred"
+                  : "text-mute hover:bg-bg2 hover:text-ink"
               }`}
             >
               {topic}
@@ -102,17 +80,16 @@ export function LearningPathsSection() {
           ))}
         </div>
 
-        {/* Tingkat Pengalaman */}
-        <div className="flex flex-wrap items-center gap-1.5 border-t border-line pt-3 lg:border-t-0 lg:pt-0">
+        <div className="flex flex-wrap items-center gap-1">
           {EXPERIENCE_FILTERS.map((level) => (
             <button
               key={level}
               type="button"
               onClick={() => setExperience(level)}
-              className={`cursor-pointer rounded-lg px-3 py-1.5 text-xs font-medium transition-colors ${
+              className={`cursor-pointer rounded-md px-2.5 py-1 text-xs transition-colors ${
                 experience === level
-                  ? "bg-ink text-bg font-semibold"
-                  : "text-mute hover:bg-redsoft hover:text-ink"
+                  ? "bg-bg2 font-semibold text-ink"
+                  : "text-mute hover:text-ink"
               }`}
             >
               {level}
@@ -121,24 +98,23 @@ export function LearningPathsSection() {
         </div>
       </div>
 
-      {/* Responsive Bento Card Grid (Bukan horizontal carousel sempit) */}
       <div>
         {isLoading ? (
-          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {[1, 2, 3, 4, 5, 6, 7, 8].map((skeleton) => (
               <div
                 key={skeleton}
-                className="h-[360px] w-full animate-pulse rounded-2xl bg-bg2"
+                className="h-[320px] w-full animate-pulse rounded-xl bg-bg2"
               />
             ))}
           </div>
         ) : rooms.length === 0 ? (
-          <div className="flex min-h-[280px] flex-col items-center justify-center gap-3 rounded-2xl border border-line bg-bg2 p-8 text-center">
-            <p className="font-heading text-lg font-semibold text-ink">
-              Tidak ada modul yang cocok dengan filter pencarian Anda
+          <div className="flex min-h-[220px] flex-col items-center justify-center gap-2 rounded-xl border border-line bg-bg2 p-8 text-center">
+            <p className="font-heading text-base font-semibold text-ink">
+              Modul tidak ditemukan
             </p>
-            <p className="max-w-md text-sm text-mute">
-              Coba gunakan kata kunci lain atau kembalikan filter peran dan tingkat pengalaman ke posisi awal.
+            <p className="max-w-sm text-sm text-mute">
+              Tidak ada modul yang sesuai dengan filter yang dipilih.
             </p>
             <button
               type="button"
@@ -147,9 +123,9 @@ export function LearningPathsSection() {
                 setCategory("Semua");
                 setSearch("");
               }}
-              className="btn-interactive mt-2 cursor-pointer rounded-lg bg-btn px-4 py-2 font-heading text-sm font-medium text-onred hover:bg-red2"
+              className="mt-2 cursor-pointer rounded-md bg-btn px-3.5 py-1.5 font-heading text-xs font-medium text-onred hover:bg-red2"
             >
-              Atur Ulang Semua Filter
+              Reset Filter
             </button>
           </div>
         ) : (
@@ -165,21 +141,21 @@ export function LearningPathsSection() {
                   visible: {
                     opacity: 1,
                     transition: {
-                      staggerChildren: prefersReducedMotion ? 0 : 0.08,
+                      staggerChildren: prefersReducedMotion ? 0 : 0.05,
                     },
                   },
                 }}
-                className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
+                className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4"
               >
                 {displayedRooms.map((room) => (
                   <motion.div
                     key={room.id}
                     variants={{
-                      hidden: { opacity: 0, y: 16 },
+                      hidden: { opacity: 0, y: 8 },
                       visible: {
                         opacity: 1,
                         y: 0,
-                        transition: { duration: 0.28, ease: "easeOut" },
+                        transition: { duration: 0.2, ease: "easeOut" },
                       },
                     }}
                     className="h-full"
@@ -191,15 +167,15 @@ export function LearningPathsSection() {
             </AnimatePresence>
 
             {rooms.length > 8 && (
-              <div className="mt-10 flex justify-center">
+              <div className="mt-8 flex justify-center">
                 <button
                   type="button"
                   onClick={() => setShowAll((prev) => !prev)}
-                  className="btn-interactive cursor-pointer rounded-xl border border-line bg-card px-6 py-2.5 font-heading text-sm font-semibold text-ink hover:border-red hover:bg-redsoft"
+                  className="cursor-pointer rounded-lg border border-line bg-card px-5 py-2 font-heading text-sm font-medium text-ink hover:border-red"
                 >
                   {showAll
                     ? "Tampilkan Lebih Sedikit"
-                    : `Lihat Seluruh ${rooms.length} Modul Lab`}
+                    : `Tampilkan Semua (${rooms.length} Modul)`}
                 </button>
               </div>
             )}

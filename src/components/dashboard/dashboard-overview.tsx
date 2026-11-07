@@ -1,15 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import {
-  IconAward,
-  IconBolt,
-  IconCheck,
-  IconFlame,
-  IconShieldCheck,
-  IconTerminal2,
-  IconTrophy,
-} from "@tabler/icons-react";
 import { RoomCard } from "@/components/rooms/room-card";
 import { Button } from "@/components/ui/button";
 import { useRooms } from "@/hooks/use-rooms";
@@ -38,96 +29,60 @@ export function DashboardOverview() {
   const recommendedRooms = (roomsData?.rooms ?? []).slice(0, 4);
 
   return (
-    <div className="flex flex-1 flex-col gap-8 p-5 sm:p-8 lg:p-10">
-      {/* Banner Sambutan */}
-      <div className="flex flex-col justify-between gap-4 rounded-2xl border border-line bg-bg2 p-6 text-ink sm:flex-row sm:items-center sm:p-8">
+    <div className="mx-auto flex w-full max-w-[1120px] flex-1 flex-col gap-10 p-5 sm:p-8 lg:p-10">
+      <div className="flex flex-col justify-between gap-4 border-b border-line pb-6 sm:flex-row sm:items-center">
         <div>
-          <span className="inline-flex items-center gap-1.5 rounded-full bg-redsoft px-3 py-1 font-heading text-xs font-semibold text-btn">
-            <IconBolt size={14} />
-            Status Pembelajaran Aktif
-          </span>
-          <h1 className="mt-2 font-heading text-2xl font-bold sm:text-3xl">
-            Selamat datang kembali, {user?.fullName ?? "Pratama Siber"}!
+          <h1 className="font-heading text-2xl font-bold text-ink sm:text-3xl">
+            Halo, {user?.fullName ?? "Pratama Siber"}
           </h1>
-          <p className="mt-1 text-sm text-mute sm:text-base">
-            Anda telah menyelesaikan {completedTasksCount} dari {totalTasksCount} tantangan pada modul aktif minggu ini.
+          <p className="mt-1 text-sm text-mute">
+            Anda telah menyelesaikan {completedTasksCount} dari {totalTasksCount} tugas pada modul aktif.
           </p>
         </div>
-        <div className="flex flex-wrap gap-3">
-          <Button variant="primary" href="/lab">
-            <IconTerminal2 size={18} />
-            <span>Lanjutkan Lab Siber</span>
-          </Button>
-        </div>
+        <Button variant="primary" href="/lab">
+          Lanjutkan Lab Aktif
+        </Button>
       </div>
 
-      {/* Kartu Metrik Utama */}
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
-        <div className="card-interactive rounded-xl border border-line bg-card p-5">
-          <div className="flex items-center justify-between text-mute">
-            <span className="text-sm font-medium">Total Poin Siber</span>
-            <IconTrophy size={20} className="text-mid" />
-          </div>
-          <p className="mt-2 font-heading text-3xl font-bold text-ink">
+      {/* Ringkasan Statistik Tanpa Kotak Berlebihan */}
+      <div className="grid grid-cols-2 gap-6 rounded-xl border border-line bg-bg2 p-6 lg:grid-cols-4">
+        <div>
+          <span className="text-xs text-mute">Total Poin Siber</span>
+          <p className="tabular-nums mt-1 font-heading text-2xl font-bold text-ink">
             {user?.points ?? 450} XP
           </p>
-          <p className="mt-1 text-xs text-ok">
-            +75 XP dari tantangan terakhir
-          </p>
         </div>
-
-        <div className="card-interactive rounded-xl border border-line bg-card p-5">
-          <div className="flex items-center justify-between text-mute">
-            <span className="text-sm font-medium">Rentetan Belajar</span>
-            <IconFlame size={20} className="text-hard" />
-          </div>
-          <p className="mt-2 font-heading text-3xl font-bold text-ink">
+        <div>
+          <span className="text-xs text-mute">Rentetan Belajar</span>
+          <p className="tabular-nums mt-1 font-heading text-2xl font-bold text-ink">
             {user?.streakDays ?? 7} Hari
           </p>
-          <p className="mt-1 text-xs text-mute">
-            Pertahankan konsistensi harian Anda
-          </p>
         </div>
-
-        <div className="card-interactive rounded-xl border border-line bg-card p-5">
-          <div className="flex items-center justify-between text-mute">
-            <span className="text-sm font-medium">Room Diselesaikan</span>
-            <IconCheck size={20} className="text-ok" />
-          </div>
-          <p className="mt-2 font-heading text-3xl font-bold text-ink">
+        <div>
+          <span className="text-xs text-mute">Modul Selesai</span>
+          <p className="tabular-nums mt-1 font-heading text-2xl font-bold text-ink">
             {user?.completedRooms ?? 3} Modul
           </p>
-          <p className="mt-1 text-xs text-mute">
-            {user?.activeRooms ?? 4} jalur sedang berjalan
-          </p>
         </div>
-
-        <div className="card-interactive rounded-xl border border-line bg-card p-5">
-          <div className="flex items-center justify-between text-mute">
-            <span className="text-sm font-medium">Peringkat Saat Ini</span>
-            <IconAward size={20} className="text-btn" />
-          </div>
-          <p className="mt-2 font-heading text-xl font-bold text-ink">
+        <div>
+          <span className="text-xs text-mute">Peringkat</span>
+          <p className="mt-1 font-heading text-lg font-bold text-ink">
             {user?.rankTitle ?? "Cyber Defender Lv. 4"}
-          </p>
-          <p className="mt-1 text-xs text-btn">
-            Top 5% Pembelajar Minggu Ini
           </p>
         </div>
       </div>
 
-      {/* Rekomendasi Room & Papan Peringkat */}
       <div className="grid grid-cols-1 gap-8 xl:grid-cols-12">
         <div className="flex flex-col gap-4 xl:col-span-8">
           <div className="flex items-center justify-between">
-            <h2 className="font-heading text-xl font-bold text-ink">
-              Rekomendasi Jalur & Modul Siber
+            <h2 className="font-heading text-lg font-bold text-ink">
+              Modul Rekomendasi
             </h2>
             <Link
               href="/#jalur-belajar"
-              className="font-heading text-sm font-medium text-btn hover:underline"
+              className="font-heading text-xs font-medium text-btn hover:underline"
             >
-              Lihat Semua (14)
+              Lihat Semua →
             </Link>
           </div>
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
@@ -139,58 +94,38 @@ export function DashboardOverview() {
 
         <div
           id="peringkat"
-          className="flex flex-col gap-4 rounded-2xl border border-line bg-card p-6 xl:col-span-4"
+          className="flex flex-col gap-4 rounded-xl border border-line bg-card p-5 xl:col-span-4"
         >
-          <div className="flex items-center justify-between">
-            <h2 className="font-heading text-lg font-bold text-ink">
-              Papan Peringkat Nasional
-            </h2>
-            <span className="rounded-full bg-redsoft px-2.5 py-1 text-xs font-semibold text-ok">
-              Minggu Ini
-            </span>
-          </div>
-          <ul className="flex flex-col gap-3">
+          <h2 className="font-heading text-base font-bold text-ink">
+            Papan Peringkat
+          </h2>
+          <ul className="divide-y divide-line">
             {LEADERBOARD.map((entry) => (
               <li
                 key={entry.rank}
-                className={`flex items-center justify-between rounded-xl p-3 ${
-                  entry.isCurrentUser
-                    ? "border border-btn bg-redsoft"
-                    : "bg-bg2"
-                }`}
+                className="flex items-center justify-between py-3 first:pt-0 last:pb-0"
               >
                 <div className="flex items-center gap-3">
-                  <span className="flex h-7 w-7 items-center justify-center rounded-full bg-btn font-heading text-xs font-bold text-onred">
+                  <span className="tabular-nums font-mono text-xs font-bold text-mute">
                     #{entry.rank}
                   </span>
                   <div>
-                    <p className="font-heading text-sm font-semibold text-ink">
+                    <p
+                      className={`font-heading text-sm font-medium ${
+                        entry.isCurrentUser ? "text-btn font-bold" : "text-ink"
+                      }`}
+                    >
                       {entry.name}
                     </p>
                     <p className="text-xs text-mute">{entry.role}</p>
                   </div>
                 </div>
-                <span className="font-heading text-sm font-bold text-ink">
+                <span className="tabular-nums font-heading text-xs font-semibold text-ink">
                   {entry.points} XP
                 </span>
               </li>
             ))}
           </ul>
-
-          <div
-            id="sertifikasi"
-            className="mt-2 rounded-xl border border-line bg-bg2 p-4 text-ink"
-          >
-            <div className="flex items-center gap-2 text-btn">
-              <IconShieldCheck size={20} />
-              <span className="font-heading text-sm font-semibold">
-                Sertifikasi Junior Pentester
-              </span>
-            </div>
-            <p className="mt-1.5 text-xs leading-relaxed text-mute">
-              Selesaikan 2 modul lagi untuk membuka ujian praktik sertifikasi resmi BisaSiber.
-            </p>
-          </div>
         </div>
       </div>
     </div>

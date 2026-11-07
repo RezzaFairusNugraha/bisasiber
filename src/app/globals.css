@@ -2,17 +2,17 @@
 
 :root {
   --bg: #FFFFFF;
-  --bg2: #FFF5F5;
+  --bg2: #FAF7F7;
   --ink: #1D1115;
   --mute: #6B5A60;
-  --line: #F0DCDC;
+  --line: #ECE2E4;
   --red: #FD0002;
   --btn: #E50002;
   --red2: #BF0002;
-  --redsoft: #FFE8E8;
+  --redsoft: #FCECEC;
   --onred: #FFFFFF;
   --card: #FFFFFF;
-  --term: #1D1115;
+  --term: #181013;
   --termfg: #F6E9EB;
   --ok: #1E8A4C;
   --mid: #D98200;
@@ -20,17 +20,17 @@
 }
 
 [data-theme="dark"] {
-  --bg: #150C10;
-  --bg2: #1D1217;
+  --bg: #120B0E;
+  --bg2: #191014;
   --ink: #F7ECEE;
-  --mute: #B09CA2;
-  --line: #35222A;
+  --mute: #A8949A;
+  --line: #2C1D23;
   --red: #FF2A2E;
   --btn: #FF2A2E;
   --red2: #FF5558;
-  --redsoft: #3A1014;
+  --redsoft: #2D1115;
   --onred: #1B0A0F;
-  --card: #1D1217;
+  --card: #191014;
   --term: #0C0609;
   --termfg: #F6E9EB;
   --ok: #4FD38A;
@@ -60,14 +60,24 @@
   --color-hard: var(--hard);
 }
 
+::selection {
+  background-color: var(--redsoft);
+  color: var(--ink);
+}
+
 body {
   background-color: var(--bg);
   color: var(--ink);
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
+  caret-color: var(--red);
 }
 
-/* Global color transitions (Step 4.2) */
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Smooth, understated transitions */
 body,
 header,
 aside,
@@ -77,23 +87,22 @@ article,
 nav,
 button,
 a,
-input,
-.theme-surface {
+input {
   transition:
-    background-color 0.4s ease,
-    border-color 0.4s ease,
-    color 0.4s ease,
-    box-shadow 0.3s ease,
-    transform 0.25s ease;
+    background-color 0.25s cubic-bezier(0.25, 1, 0.5, 1),
+    border-color 0.25s cubic-bezier(0.25, 1, 0.5, 1),
+    color 0.25s cubic-bezier(0.25, 1, 0.5, 1),
+    box-shadow 0.25s cubic-bezier(0.25, 1, 0.5, 1),
+    transform 0.2s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
-/* Visible keyboard focus (Step 4.10) */
+/* Visible keyboard focus */
 :focus-visible {
-  outline: 3px solid var(--red) !important;
+  outline: 2px solid var(--red) !important;
   outline-offset: 2px;
 }
 
-/* View Transition Circle Expand (Step 4.1) */
+/* View Transition Circle Expand */
 ::view-transition-old(root),
 ::view-transition-new(root) {
   animation: none;
@@ -101,7 +110,7 @@ input,
 }
 
 ::view-transition-new(root) {
-  animation: theme-circle-expand 650ms ease-in-out forwards;
+  animation: theme-circle-expand 550ms cubic-bezier(0.25, 1, 0.5, 1) forwards;
 }
 
 @keyframes theme-circle-expand {
@@ -113,154 +122,40 @@ input,
   }
 }
 
-/* Button hover lift + soft red shadow & active press (Step 4.3) */
-.btn-interactive {
-  transition:
-    transform 0.22s ease,
-    box-shadow 0.22s ease,
-    background-color 0.4s ease,
-    border-color 0.4s ease,
-    color 0.4s ease;
-}
-
+/* Subtle button interaction */
 .btn-interactive:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 20px -6px color-mix(in srgb, var(--red) 45%, transparent);
+  transform: translateY(-1px);
 }
 
 .btn-interactive:active {
-  transform: scale(0.98);
+  transform: scale(0.99);
 }
 
-/* RoomCard & interactive card hover (Step 4.4) */
-.card-interactive {
-  transition:
-    transform 0.28s cubic-bezier(0.22, 1, 0.36, 1),
-    border-color 0.3s ease,
-    box-shadow 0.3s ease,
-    background-color 0.4s ease;
-}
-
+/* Subtle card hover */
 .card-interactive:hover {
-  transform: translateY(-6px);
-  border-color: var(--red) !important;
-  box-shadow: 0 18px 36px -22px var(--red);
-}
-
-/* Command chips lift on hover and fill with var(--red) (Step 4.5) */
-.cmd-chip {
-  transition:
-    transform 0.2s ease,
-    background-color 0.25s ease,
-    border-color 0.25s ease,
-    color 0.25s ease;
-}
-
-.cmd-chip:hover {
   transform: translateY(-2px);
-  background-color: var(--red) !important;
-  border-color: var(--red) !important;
+  border-color: color-mix(in srgb, var(--red) 45%, var(--line)) !important;
+  box-shadow: 0 12px 24px -16px rgba(29, 17, 21, 0.14);
+}
+
+/* Command chips */
+.cmd-chip:hover {
+  background-color: var(--btn) !important;
+  border-color: var(--btn) !important;
   color: var(--onred) !important;
 }
 
-/* Logo white shine sweep every ~5s on red layer (Step 3.3) */
+/* Logo red layer */
 .logo-red-shine {
   background-color: var(--red);
-  background-image: linear-gradient(
-    105deg,
-    transparent 35%,
-    rgba(255, 255, 255, 0.72) 50%,
-    transparent 65%
-  );
-  background-size: 260% 100%;
-  background-repeat: no-repeat;
-  animation: logo-shine-sweep 5s ease-in-out infinite;
-  transition: background-color 0.4s ease;
+  transition: background-color 0.25s ease;
 }
 
-@keyframes logo-shine-sweep {
-  0%,
-  70% {
-    background-position: 140% 0;
-  }
-  100% {
-    background-position: -60% 0;
-  }
-}
-
-/* Hero circuit traces dash animation & ring pulse (Step 4.6) */
-.circuit-glow-fast {
-  stroke-dasharray: 36 964;
-  filter: drop-shadow(0 0 6px var(--red));
-  animation: circuit-dash 4.5s linear infinite;
-}
-
-.circuit-glow-slow {
-  stroke-dasharray: 36 964;
-  filter: drop-shadow(0 0 6px var(--red));
-  animation: circuit-dash 6.5s linear infinite;
-}
-
-@keyframes circuit-dash {
-  from {
-    stroke-dashoffset: 0;
-  }
-  to {
-    stroke-dashoffset: -1000;
-  }
-}
-
-.circuit-ring-pulse {
-  transform-box: fill-box;
-  transform-origin: center;
-  animation: ring-pulse 2.4s ease-in-out infinite;
-}
-
-@keyframes ring-pulse {
-  0%,
-  100% {
-    transform: scale(1);
-    opacity: 0.75;
-  }
-  50% {
-    transform: scale(1.4);
-    opacity: 1;
-  }
-}
-
-/* Hero soft red scan line drifting down every 7s (Step 4.7) */
-.hero-scanline {
-  background: linear-gradient(
-    180deg,
-    transparent 0%,
-    var(--redsoft) 50%,
-    transparent 100%
-  );
-  animation: scanline-drift 7s linear infinite;
-}
-
-@keyframes scanline-drift {
-  0% {
-    transform: translateY(-160px);
-    opacity: 0;
-  }
-  15% {
-    opacity: 0.55;
-  }
-  85% {
-    opacity: 0.55;
-  }
-  100% {
-    transform: translateY(680px);
-    opacity: 0;
-  }
-}
-
-/* Blinking terminal caret (Step 4.5) */
+/* Blinking terminal caret */
 .terminal-caret {
   display: inline-block;
-  width: 7px;
-  height: 14px;
+  width: 6px;
+  height: 13px;
   vertical-align: middle;
   background-color: var(--red);
   animation: caret-blink 1s steps(2, start) infinite;
@@ -272,7 +167,7 @@ input,
   }
 }
 
-/* Respect prefers-reduced-motion (Step 4.10) */
+/* Respect prefers-reduced-motion */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -303,10 +198,10 @@ input,
 }
 
 ::-webkit-scrollbar-thumb {
-  background: color-mix(in srgb, var(--mute) 35%, transparent);
+  background: color-mix(in srgb, var(--mute) 30%, transparent);
   border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: color-mix(in srgb, var(--mute) 55%, transparent);
+  background: color-mix(in srgb, var(--mute) 50%, transparent);
 }

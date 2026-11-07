@@ -2,16 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useReducedMotion } from "motion/react";
-import {
-  IconCheck,
-  IconCpu,
-  IconFlag,
-  IconHelpCircle,
-  IconPlayerPlay,
-  IconPlayerStop,
-  IconRefresh,
-  IconTerminal2,
-} from "@tabler/icons-react";
+import { IconCheck } from "@tabler/icons-react";
 import { Button } from "@/components/ui/button";
 import {
   useLabInstance,
@@ -84,7 +75,6 @@ export function LabTerminalWorkspace() {
     Record<number, { success: boolean; message: string }>
   >({});
 
-  // Typing effect for the first command (Step 4.5)
   useEffect(() => {
     if (prefersReducedMotion) {
       setTypedGreetingCmd(FIRST_TYPED_COMMAND);
@@ -146,118 +136,92 @@ export function LabTerminalWorkspace() {
   }
 
   return (
-    <div className="grid grid-cols-1 gap-6 xl:grid-cols-12">
+    <div className="mx-auto grid max-w-[1200px] grid-cols-1 gap-8 xl:grid-cols-12">
       {/* Kolom Kiri: Daftar Tugas & Submit Flag */}
-      <div className="flex flex-col gap-5 xl:col-span-6">
-        <div className="rounded-2xl border border-line bg-card p-6 shadow-2xs">
-          <div className="flex flex-wrap items-center justify-between gap-3">
-            <div>
-              <span className="rounded-md bg-redsoft px-2.5 py-1 font-heading text-xs font-semibold text-btn">
-                Room Aktif • Mudah
-              </span>
-              <h1 className="mt-2 font-heading text-2xl font-bold text-ink">
-                Keamanan Siber 101: Eksplorasi Jaringan & Linux
-              </h1>
-            </div>
-            <div className="text-right">
-              <span className="font-heading text-sm font-semibold text-ok">
-                {completedIds.length} / {tasks.length} Tugas Selesai
-              </span>
-              <div className="mt-1.5 h-2 w-36 overflow-hidden rounded-full bg-bg2">
-                <div
-                  className="h-full bg-btn transition-all"
-                  style={{
-                    width: `${
-                      tasks.length
-                        ? Math.round((completedIds.length / tasks.length) * 100)
-                        : 0
-                    }%`,
-                  }}
-                />
-              </div>
-            </div>
+      <div className="flex flex-col gap-6 xl:col-span-6">
+        <div className="border-b border-line pb-4">
+          <div className="flex items-center justify-between gap-3">
+            <h1 className="font-heading text-xl font-bold text-ink sm:text-2xl">
+              Keamanan Siber 101: Eksplorasi Jaringan &amp; Linux
+            </h1>
+            <span className="tabular-nums shrink-0 font-heading text-xs font-semibold text-ok">
+              {completedIds.length} / {tasks.length} Selesai
+            </span>
           </div>
-          <p className="mt-3 text-sm leading-relaxed text-mute">
-            Gunakan AttackBox di sebelah kanan untuk memindai layanan target, mencari file tersembunyi, dan mengumpulkan seluruh flag BISA&#123;...&#125;.
+          <p className="mt-1.5 text-sm leading-relaxed text-mute">
+            Gunakan AttackBox di sebelah kanan untuk memindai layanan target dan mengumpulkan flag BISA&#123;...&#125;.
           </p>
         </div>
 
-        {tasks.map((task) => {
-          const isCompleted = completedIds.includes(task.id);
-          const feedback = feedbackMap[task.id];
+        <div className="flex flex-col gap-4">
+          {tasks.map((task) => {
+            const isCompleted = completedIds.includes(task.id);
+            const feedback = feedbackMap[task.id];
 
-          return (
-            <article
-              key={task.id}
-              className={`card-interactive rounded-2xl border bg-card p-6 transition-all ${
-                isCompleted
-                  ? "border-ok bg-bg2"
-                  : "border-line"
-              }`}
-            >
-              <div className="flex items-start justify-between gap-3">
-                <div className="flex items-center gap-2.5">
-                  <span
-                    className={`inline-flex h-7 w-7 items-center justify-center rounded-full font-heading text-xs font-bold ${
-                      isCompleted
-                        ? "bg-ok text-onred"
-                        : "bg-btn text-onred"
-                    }`}
-                  >
-                    {isCompleted ? <IconCheck size={15} /> : task.orderIndex}
+            return (
+              <article
+                key={task.id}
+                className={`rounded-xl border bg-card p-5 ${
+                  isCompleted ? "border-ok/50" : "border-line"
+                }`}
+              >
+                <div className="flex items-start justify-between gap-3">
+                  <div className="flex items-center gap-2.5">
+                    <span
+                      className={`tabular-nums inline-flex h-6 w-6 items-center justify-center rounded-full font-heading text-xs font-bold ${
+                        isCompleted
+                          ? "bg-ok text-onred"
+                          : "bg-bg2 text-ink"
+                      }`}
+                    >
+                      {isCompleted ? <IconCheck size={14} /> : task.orderIndex}
+                    </span>
+                    <h2 className="font-heading text-base font-semibold text-ink">
+                      {task.title}
+                    </h2>
+                  </div>
+                  <span className="tabular-nums shrink-0 text-xs font-medium text-mute">
+                    +{task.points} XP
                   </span>
-                  <h2 className="font-heading text-lg font-semibold text-ink">
-                    {task.title}
-                  </h2>
                 </div>
-                <span className="shrink-0 rounded-full bg-bg2 px-3 py-1 font-heading text-xs font-medium text-ink">
-                  +{task.points} XP
-                </span>
-              </div>
 
-              <p className="mt-3 text-sm leading-relaxed text-mute">
-                {task.contentMarkdown}
-              </p>
+                <p className="mt-3 text-sm leading-relaxed text-mute">
+                  {task.contentMarkdown}
+                </p>
 
-              <div className="mt-4 rounded-xl bg-bg2 p-4">
-                <p className="font-heading text-sm font-medium text-ink">
+                <p className="mt-4 font-heading text-xs font-medium text-ink">
                   {task.question}
                 </p>
 
                 <form
                   onSubmit={(e) => handleFlagSubmit(task.id, e)}
-                  className="mt-3 flex flex-col gap-2.5 sm:flex-row"
+                  className="mt-2 flex flex-col gap-2 sm:flex-row"
                 >
-                  <div className="relative flex-1">
-                    <IconFlag
-                      size={16}
-                      className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-mute"
-                    />
-                    <input
-                      type="text"
-                      value={
-                        flagInputs[task.id] ??
-                        (isCompleted ? task.expectedFlag : "")
-                      }
-                      onChange={(e) =>
-                        setFlagInputs((prev) => ({
-                          ...prev,
-                          [task.id]: e.target.value,
-                        }))
-                      }
-                      disabled={isCompleted}
-                      placeholder="BISA{...}"
-                      aria-label={`Jawaban flag untuk ${task.title}`}
-                      className="h-10 w-full rounded-lg border border-line bg-card pl-9 pr-3 font-mono text-sm text-ink focus:border-btn focus:outline-none disabled:bg-bg2 disabled:text-ok"
-                    />
-                  </div>
+                  <input
+                    type="text"
+                    value={
+                      flagInputs[task.id] ??
+                      (isCompleted ? task.expectedFlag : "")
+                    }
+                    onChange={(e) =>
+                      setFlagInputs((prev) => ({
+                        ...prev,
+                        [task.id]: e.target.value,
+                      }))
+                    }
+                    disabled={isCompleted}
+                    placeholder="BISA{...}"
+                    aria-label={`Jawaban flag untuk ${task.title}`}
+                    className="h-9 flex-1 rounded-md border border-line bg-bg px-3 font-mono text-xs text-ink focus:border-btn focus:outline-none disabled:bg-bg2 disabled:text-ok"
+                  />
                   <Button
                     type="submit"
                     variant="primary"
+                    size="sm"
                     disabled={isCompleted || submitFlagMutation.isPending}
-                    className="h-10 shrink-0"
+                    className="h-9 shrink-0"
                   >
-                    {isCompleted ? "Terverifikasi" : "Kirim Flag"}
+                    {isCompleted ? "Selesai" : "Kirim Flag"}
                   </Button>
                   <button
                     type="button"
@@ -267,74 +231,60 @@ export function LabTerminalWorkspace() {
                         [task.id]: !prev[task.id],
                       }))
                     }
-                    className="btn-interactive inline-flex h-10 shrink-0 cursor-pointer items-center justify-center gap-1.5 rounded-lg border border-line bg-card px-3 text-xs font-medium text-mute hover:border-red hover:text-ink"
+                    className="inline-flex h-9 shrink-0 cursor-pointer items-center justify-center rounded-md border border-line bg-bg px-3 text-xs text-mute hover:text-ink"
                   >
-                    <IconHelpCircle size={16} />
-                    <span>Petunjuk</span>
+                    Petunjuk
                   </button>
                 </form>
 
                 {visibleHints[task.id] && (
-                  <p className="mt-2.5 rounded-lg border border-line bg-redsoft px-3 py-2 text-xs text-ink">
-                    <strong>Petunjuk:</strong> {task.hint}
+                  <p className="mt-2.5 rounded-md bg-bg2 px-3 py-2 text-xs text-mute">
+                    <strong className="text-ink">Petunjuk:</strong> {task.hint}
                   </p>
                 )}
 
                 {feedback && (
                   <p
-                    className={`mt-2.5 text-xs font-semibold ${
+                    className={`mt-2 text-xs font-medium ${
                       feedback.success ? "text-ok" : "text-hard"
                     }`}
                   >
                     {feedback.message}
                   </p>
                 )}
-              </div>
-            </article>
-          );
-        })}
+              </article>
+            );
+          })}
+        </div>
       </div>
 
-      {/* Kolom Kanan: Orkestrasi Mesin Lab Docker & Terminal Interaktif */}
-      <div className="flex flex-col gap-5 xl:col-span-6">
-        <div className="rounded-2xl border border-line bg-card p-5 text-ink shadow-lg">
-          <div className="flex flex-wrap items-center justify-between gap-4 border-b border-line pb-4">
-            <div className="flex items-center gap-3">
-              <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-redsoft text-btn">
-                <IconCpu size={22} />
-              </span>
-              <div>
-                <div className="flex items-center gap-2">
-                  <h2 className="font-heading text-base font-semibold text-ink">
-                    Orkestrasi Container Lab Docker
-                  </h2>
-                  <span
-                    className={`inline-flex items-center gap-1 rounded-full px-2.5 py-0.5 text-[11px] font-semibold ${
-                      lab?.status === "running"
-                        ? "bg-redsoft text-ok"
-                        : "bg-bg2 text-mute"
-                    }`}
-                  >
-                    <span
-                      className={`h-1.5 w-1.5 rounded-full ${
-                        lab?.status === "running"
-                          ? "bg-ok"
-                          : "bg-mute"
-                      }`}
-                    />
-                    {isLabLoading
-                      ? "Memuat..."
-                      : lab?.status === "running"
-                      ? "Aktif (Running)"
-                      : "Nonaktif"}
-                  </span>
-                </div>
-                <p className="text-xs text-mute">
-                  {lab
-                    ? `Container ID: ${lab.containerId} • Target IP: ${lab.ipAddress}:${lab.webPort}`
-                    : "Belum ada mesin target aktif. Nyalakan container untuk memulai."}
-                </p>
+      {/* Kolom Kanan: Terminal AttackBox */}
+      <div className="flex flex-col gap-4 xl:col-span-6">
+        <div className="rounded-xl border border-line bg-card p-5 text-ink">
+          <div className="flex flex-wrap items-center justify-between gap-3 border-b border-line pb-3.5">
+            <div>
+              <div className="flex items-center gap-2">
+                <h2 className="font-heading text-sm font-semibold text-ink">
+                  Container Lab Target
+                </h2>
+                <span
+                  className={`inline-flex items-center gap-1 text-xs font-medium ${
+                    lab?.status === "running" ? "text-ok" : "text-mute"
+                  }`}
+                >
+                  ●{" "}
+                  {isLabLoading
+                    ? "Memuat..."
+                    : lab?.status === "running"
+                    ? "Aktif"
+                    : "Nonaktif"}
+                </span>
               </div>
+              <p className="tabular-nums mt-0.5 font-mono text-xs text-mute">
+                {lab
+                  ? `${lab.ipAddress}:${lab.webPort} (${lab.containerId})`
+                  : "Mesin target belum dijalankan"}
+              </p>
             </div>
 
             <div className="flex items-center gap-2">
@@ -347,8 +297,7 @@ export function LabTerminalWorkspace() {
                   }
                   disabled={manageLab.isPending}
                 >
-                  <IconPlayerPlay size={16} />
-                  <span>Nyalakan Mesin</span>
+                  Nyalakan Mesin
                 </Button>
               ) : (
                 <>
@@ -360,28 +309,24 @@ export function LabTerminalWorkspace() {
                     }
                     disabled={manageLab.isPending}
                   >
-                    <IconRefresh size={15} />
-                    <span>Reset IP</span>
+                    Reset IP
                   </Button>
                   <Button
-                    variant="danger"
+                    variant="ghost"
                     size="sm"
                     onClick={() =>
                       manageLab.mutate({ action: "stop", roomId: 1 })
                     }
                     disabled={manageLab.isPending}
                   >
-                    <IconPlayerStop size={15} />
-                    <span>Matikan</span>
+                    Matikan
                   </Button>
                 </>
               )}
             </div>
           </div>
 
-          {/* Shortcut Perintah Cepat (Step 4.5 cmd-chip) */}
-          <div className="mt-4 flex flex-wrap items-center gap-2">
-            <span className="text-xs text-mute">Perintah Cepat:</span>
+          <div className="mt-3 flex flex-wrap items-center gap-1.5">
             {[
               "nmap -sV 10.10.24.88",
               "ls -la",
@@ -393,25 +338,20 @@ export function LabTerminalWorkspace() {
                 key={preset}
                 type="button"
                 onClick={() => runTerminalCommand(preset)}
-                className="cmd-chip cursor-pointer rounded-md border border-line bg-bg2 px-2.5 py-1 font-mono text-xs text-btn"
+                className="cmd-chip cursor-pointer rounded border border-line bg-bg2 px-2 py-1 font-mono text-[11px] text-ink"
               >
                 {preset}
               </button>
             ))}
           </div>
 
-          {/* Layar Terminal — var(--term) dan var(--termfg) (Step 2 & 4.5) */}
-          <div className="mt-4 flex h-[380px] flex-col justify-between rounded-xl border border-line bg-term p-4 font-mono text-xs text-termfg sm:text-sm">
-            <div className="flex items-center justify-between border-b border-line/30 pb-2.5 text-xs text-termfg/65">
-              <span className="inline-flex items-center gap-1.5">
-                <IconTerminal2 size={15} className="text-red" />
-                <span>bisa@attackbox: ~ (SSH Terenkripsi)</span>
-              </span>
-              <span>Port {lab?.sshPort ?? 2222}</span>
+          <div className="mt-3 flex h-[380px] flex-col justify-between rounded-lg bg-term p-4 font-mono text-xs text-termfg">
+            <div className="flex items-center justify-between border-b border-white/10 pb-2 text-[11px] text-termfg/55">
+              <span>bisa@attackbox: ~</span>
+              <span className="tabular-nums">SSH :{lab?.sshPort ?? 2222}</span>
             </div>
 
             <div className="my-3 flex-1 space-y-1.5 overflow-y-auto pr-1 text-termfg">
-              {/* Baris Pertama dengan Efek Mengetik & Caret Berkedip (Step 4.5) */}
               <div className="font-semibold text-red">
                 bisa@attackbox:~$ {typedGreetingCmd}
                 <span aria-hidden="true" className="terminal-caret ml-1" />
@@ -425,7 +365,7 @@ export function LabTerminalWorkspace() {
                       ? "font-semibold text-red"
                       : line.includes("BISA{")
                       ? "font-bold text-ok"
-                      : "text-termfg/90"
+                      : "text-termfg/85"
                   }
                 >
                   {line}
@@ -438,22 +378,20 @@ export function LabTerminalWorkspace() {
                 e.preventDefault();
                 runTerminalCommand(commandInput);
               }}
-              className="flex items-center gap-2 border-t border-line/30 pt-2.5"
+              className="flex items-center gap-2 border-t border-white/10 pt-2.5"
             >
-              <span className="font-semibold text-red">
-                bisa@attackbox:~$
-              </span>
+              <span className="font-semibold text-red">$</span>
               <input
                 type="text"
                 value={commandInput}
                 onChange={(e) => setCommandInput(e.target.value)}
-                placeholder="Ketik perintah Linux di sini..."
+                placeholder="Ketik perintah..."
                 aria-label="Input perintah terminal"
-                className="flex-1 bg-transparent text-termfg placeholder:text-termfg/45 focus:outline-none"
+                className="flex-1 bg-transparent text-termfg placeholder:text-termfg/40 focus:outline-none"
               />
               <button
                 type="submit"
-                className="btn-interactive cursor-pointer rounded bg-btn px-2.5 py-1 font-heading text-xs font-semibold text-onred hover:bg-red2"
+                className="cursor-pointer rounded bg-btn px-2.5 py-1 font-heading text-xs font-medium text-onred hover:bg-red2"
               >
                 Jalankan
               </button>
