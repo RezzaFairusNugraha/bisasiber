@@ -16,18 +16,18 @@ export default function LoginPage() {
         <BrandLogo size="md" />
         <Link
           href="/"
-          className="font-heading text-sm text-mute transition-colors hover:text-ink"
+          className="inline-flex min-h-11 items-center px-2 font-heading text-sm font-medium text-mute transition-colors hover:text-ink"
         >
-          ← Beranda
+          ← Kembali ke Beranda
         </Link>
       </div>
 
       <main className="mx-auto my-12 w-full max-w-sm">
-        <h1 className="font-heading text-2xl font-bold text-ink">
+        <h1 className="font-heading text-2xl font-extrabold text-ink">
           Masuk ke BisaSiber
         </h1>
-        <p className="mt-1.5 text-sm text-mute">
-          Lanjutkan progres modul dan akses laboratorium interaktif Anda.
+        <p className="mt-1.5 text-sm leading-relaxed text-mute">
+          Lanjutkan progres modul dan nyalakan kembali sesi AttackBox Anda.
         </p>
 
         <div className="mt-6">
@@ -40,7 +40,7 @@ export default function LoginPage() {
 
         <div className="my-6 flex items-center gap-3">
           <div className="h-px flex-1 bg-line" />
-          <span className="text-xs text-mute">atau</span>
+          <span className="text-xs text-mute">atau gunakan email</span>
           <div className="h-px flex-1 bg-line" />
         </div>
 
@@ -48,9 +48,9 @@ export default function LoginPage() {
           <div>
             <label
               htmlFor="email"
-              className="mb-1.5 block font-heading text-xs font-medium text-ink"
+              className="mb-1.5 block font-heading text-xs font-semibold text-ink"
             >
-              Email
+              Alamat Email
             </label>
             <input
               id="email"
@@ -58,7 +58,7 @@ export default function LoginPage() {
               type="email"
               required
               placeholder="nama@domain.id"
-              className="h-10 w-full rounded-lg border border-line bg-card px-3.5 text-sm text-ink placeholder:text-mute focus:border-btn focus:outline-none"
+              className="h-11 w-full rounded-lg border border-line bg-card px-3.5 text-sm text-ink placeholder:text-mute focus:border-btn focus:outline-none"
             />
           </div>
 
@@ -66,7 +66,7 @@ export default function LoginPage() {
             <div className="mb-1.5 flex items-center justify-between">
               <label
                 htmlFor="password"
-                className="font-heading text-xs font-medium text-ink"
+                className="font-heading text-xs font-semibold text-ink"
               >
                 Kata Sandi
               </label>
@@ -74,7 +74,7 @@ export default function LoginPage() {
                 href="/daftar"
                 className="text-xs text-mute hover:text-ink"
               >
-                Lupa sandi?
+                Lupa kata sandi?
               </Link>
             </div>
             <input
@@ -82,13 +82,18 @@ export default function LoginPage() {
               name="password"
               type="password"
               required
-              placeholder="••••••••"
-              className="h-10 w-full rounded-lg border border-line bg-card px-3.5 text-sm text-ink placeholder:text-mute focus:border-btn focus:outline-none"
+              placeholder="Masukkan kata sandi Anda"
+              className="h-11 w-full rounded-lg border border-line bg-card px-3.5 text-sm text-ink placeholder:text-mute focus:border-btn focus:outline-none"
             />
           </div>
 
-          <Button type="submit" variant="primary" size="lg" className="mt-2 w-full">
-            Masuk
+          <Button
+            type="submit"
+            variant="primary"
+            size="lg"
+            className="mt-2 w-full"
+          >
+            Masuk ke Dashboard
           </Button>
         </form>
 
@@ -98,7 +103,7 @@ export default function LoginPage() {
             href="/daftar"
             className="font-semibold text-btn hover:underline"
           >
-            Daftar gratis
+            Buat akun gratis
           </Link>
         </p>
       </main>

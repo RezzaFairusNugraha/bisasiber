@@ -16,18 +16,18 @@ export default function RegisterPage() {
         <BrandLogo size="md" />
         <Link
           href="/"
-          className="font-heading text-sm text-mute transition-colors hover:text-ink"
+          className="inline-flex min-h-11 items-center px-2 font-heading text-sm font-medium text-mute transition-colors hover:text-ink"
         >
-          ← Beranda
+          ← Kembali ke Beranda
         </Link>
       </div>
 
       <main className="mx-auto my-12 w-full max-w-sm">
-        <h1 className="font-heading text-2xl font-bold text-ink">
+        <h1 className="font-heading text-2xl font-extrabold text-ink">
           Buat Akun Gratis
         </h1>
-        <p className="mt-1.5 text-sm text-mute">
-          Mulai pelajari keamanan siber langsung dari browser Anda.
+        <p className="mt-1.5 text-sm leading-relaxed text-mute">
+          Mulai latihan Penetration Testing, SOC, dan Red Team langsung dari browser Anda.
         </p>
 
         <div className="mt-6">
@@ -40,7 +40,7 @@ export default function RegisterPage() {
 
         <div className="my-6 flex items-center gap-3">
           <div className="h-px flex-1 bg-line" />
-          <span className="text-xs text-mute">atau</span>
+          <span className="text-xs text-mute">atau daftar dengan email</span>
           <div className="h-px flex-1 bg-line" />
         </div>
 
@@ -48,7 +48,7 @@ export default function RegisterPage() {
           <div>
             <label
               htmlFor="fullName"
-              className="mb-1.5 block font-heading text-xs font-medium text-ink"
+              className="mb-1.5 block font-heading text-xs font-semibold text-ink"
             >
               Nama Lengkap
             </label>
@@ -58,16 +58,16 @@ export default function RegisterPage() {
               type="text"
               required
               placeholder="Pratama Siber"
-              className="h-10 w-full rounded-lg border border-line bg-card px-3.5 text-sm text-ink placeholder:text-mute focus:border-btn focus:outline-none"
+              className="h-11 w-full rounded-lg border border-line bg-card px-3.5 text-sm text-ink placeholder:text-mute focus:border-btn focus:outline-none"
             />
           </div>
 
           <div>
             <label
               htmlFor="email"
-              className="mb-1.5 block font-heading text-xs font-medium text-ink"
+              className="mb-1.5 block font-heading text-xs font-semibold text-ink"
             >
-              Email
+              Alamat Email
             </label>
             <input
               id="email"
@@ -75,14 +75,14 @@ export default function RegisterPage() {
               type="email"
               required
               placeholder="nama@domain.id"
-              className="h-10 w-full rounded-lg border border-line bg-card px-3.5 text-sm text-ink placeholder:text-mute focus:border-btn focus:outline-none"
+              className="h-11 w-full rounded-lg border border-line bg-card px-3.5 text-sm text-ink placeholder:text-mute focus:border-btn focus:outline-none"
             />
           </div>
 
           <div>
             <label
               htmlFor="password"
-              className="mb-1.5 block font-heading text-xs font-medium text-ink"
+              className="mb-1.5 block font-heading text-xs font-semibold text-ink"
             >
               Kata Sandi
             </label>
@@ -92,12 +92,17 @@ export default function RegisterPage() {
               type="password"
               required
               placeholder="Minimal 8 karakter"
-              className="h-10 w-full rounded-lg border border-line bg-card px-3.5 text-sm text-ink placeholder:text-mute focus:border-btn focus:outline-none"
+              className="h-11 w-full rounded-lg border border-line bg-card px-3.5 text-sm text-ink placeholder:text-mute focus:border-btn focus:outline-none"
             />
           </div>
 
-          <Button type="submit" variant="primary" size="lg" className="mt-2 w-full">
-            Daftar Sekarang
+          <Button
+            type="submit"
+            variant="primary"
+            size="lg"
+            className="mt-2 w-full"
+          >
+            Buat Akun &amp; Mulai Lab
           </Button>
         </form>
 
@@ -107,7 +112,7 @@ export default function RegisterPage() {
             href="/masuk"
             className="font-semibold text-btn hover:underline"
           >
-            Masuk
+            Masuk di sini
           </Link>
         </p>
       </main>

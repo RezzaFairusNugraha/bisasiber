@@ -2,17 +2,17 @@
 
 :root {
   --bg: #FFFFFF;
-  --bg2: #FAF7F7;
+  --bg2: #FFF5F5;
   --ink: #1D1115;
   --mute: #6B5A60;
-  --line: #ECE2E4;
+  --line: #F0DCDC;
   --red: #FD0002;
   --btn: #E50002;
   --red2: #BF0002;
-  --redsoft: #FCECEC;
+  --redsoft: #FFE8E8;
   --onred: #FFFFFF;
   --card: #FFFFFF;
-  --term: #181013;
+  --term: #1D1115;
   --termfg: #F6E9EB;
   --ok: #1E8A4C;
   --mid: #D98200;
@@ -20,17 +20,17 @@
 }
 
 [data-theme="dark"] {
-  --bg: #120B0E;
-  --bg2: #191014;
+  --bg: #150C10;
+  --bg2: #1D1217;
   --ink: #F7ECEE;
-  --mute: #A8949A;
-  --line: #2C1D23;
+  --mute: #B09CA2;
+  --line: #35222A;
   --red: #FF2A2E;
   --btn: #FF2A2E;
   --red2: #FF5558;
-  --redsoft: #2D1115;
+  --redsoft: #3A1014;
   --onred: #1B0A0F;
-  --card: #191014;
+  --card: #1D1217;
   --term: #0C0609;
   --termfg: #F6E9EB;
   --ok: #4FD38A;
@@ -39,8 +39,9 @@
 }
 
 @theme inline {
-  --font-heading: "Ubuntu", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  --font-sans: "Source Sans 3", "Inter", system-ui, -apple-system, sans-serif;
+  --font-heading: "Bricolage Grotesque", sans-serif;
+  --font-sans: "Instrument Sans", sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
 
   --color-bg: var(--bg);
   --color-bg2: var(--bg2);
@@ -69,15 +70,41 @@ body {
   background-color: var(--bg);
   color: var(--ink);
   font-family: var(--font-sans);
+  line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   caret-color: var(--red);
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-heading);
+  text-wrap: balance;
+}
+
+h1 {
+  letter-spacing: -0.028em;
+}
+
+h2 {
+  letter-spacing: -0.02em;
+}
+
+h3 {
+  letter-spacing: -0.012em;
+}
+
+p {
+  text-wrap: pretty;
+  max-width: 65ch;
 }
 
 .tabular-nums {
   font-variant-numeric: tabular-nums;
 }
 
-/* Smooth, understated transitions */
+/* Purposeful, responsive UI transitions */
 body,
 header,
 aside,
@@ -89,20 +116,21 @@ button,
 a,
 input {
   transition:
-    background-color 0.25s cubic-bezier(0.25, 1, 0.5, 1),
-    border-color 0.25s cubic-bezier(0.25, 1, 0.5, 1),
-    color 0.25s cubic-bezier(0.25, 1, 0.5, 1),
-    box-shadow 0.25s cubic-bezier(0.25, 1, 0.5, 1),
-    transform 0.2s cubic-bezier(0.25, 1, 0.5, 1);
+    background-color 220ms cubic-bezier(0.2, 0.9, 0.3, 1),
+    border-color 220ms cubic-bezier(0.2, 0.9, 0.3, 1),
+    color 180ms cubic-bezier(0.2, 0.9, 0.3, 1),
+    box-shadow 240ms cubic-bezier(0.2, 0.9, 0.3, 1),
+    transform 200ms cubic-bezier(0.2, 0.9, 0.3, 1),
+    opacity 200ms cubic-bezier(0.2, 0.9, 0.3, 1);
 }
 
-/* Visible keyboard focus */
+/* Visible 3px red keyboard focus ring */
 :focus-visible {
-  outline: 2px solid var(--red) !important;
+  outline: 3px solid var(--red) !important;
   outline-offset: 2px;
 }
 
-/* View Transition Circle Expand */
+/* View Transition Circle Expand from click point */
 ::view-transition-old(root),
 ::view-transition-new(root) {
   animation: none;
@@ -110,7 +138,7 @@ input {
 }
 
 ::view-transition-new(root) {
-  animation: theme-circle-expand 550ms cubic-bezier(0.25, 1, 0.5, 1) forwards;
+  animation: theme-circle-expand 650ms cubic-bezier(0.2, 0.9, 0.3, 1) forwards;
 }
 
 @keyframes theme-circle-expand {
@@ -122,33 +150,59 @@ input {
   }
 }
 
-/* Subtle button interaction */
+/* Tactile button hover & press feedback */
 .btn-interactive:hover {
-  transform: translateY(-1px);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px -12px color-mix(in srgb, var(--red) 45%, transparent);
 }
 
 .btn-interactive:active {
-  transform: scale(0.99);
+  transform: scale(0.98);
 }
 
-/* Subtle card hover */
+/* Card hover feedback */
 .card-interactive:hover {
-  transform: translateY(-2px);
-  border-color: color-mix(in srgb, var(--red) 45%, var(--line)) !important;
-  box-shadow: 0 12px 24px -16px rgba(29, 17, 21, 0.14);
+  transform: translateY(-4px);
+  border-color: var(--red) !important;
+  box-shadow: 0 18px 34px -22px color-mix(in srgb, var(--red) 35%, transparent);
 }
 
-/* Command chips */
+/* Terminal command chips */
 .cmd-chip:hover {
+  transform: translateY(-1px);
   background-color: var(--btn) !important;
   border-color: var(--btn) !important;
   color: var(--onred) !important;
 }
 
-/* Logo red layer */
+/* Logo red layer with subtle sweep */
 .logo-red-shine {
   background-color: var(--red);
-  transition: background-color 0.25s ease;
+  transition: background-color 240ms cubic-bezier(0.2, 0.9, 0.3, 1);
+}
+
+/* Subtle circuit trace current flow */
+.circuit-current {
+  stroke-dasharray: 18 240;
+  stroke-dashoffset: 258;
+  animation: circuit-flow 6s cubic-bezier(0.2, 0.9, 0.3, 1) infinite;
+}
+
+@keyframes circuit-flow {
+  0% {
+    stroke-dashoffset: 258;
+    opacity: 0;
+  }
+  20% {
+    opacity: 0.85;
+  }
+  75% {
+    opacity: 0.85;
+  }
+  100% {
+    stroke-dashoffset: 0;
+    opacity: 0;
+  }
 }
 
 /* Blinking terminal caret */
@@ -167,17 +221,16 @@ input {
   }
 }
 
-/* Respect prefers-reduced-motion */
+/* Respect prefers-reduced-motion: remove spatial motion, preserve opacity/color feedback */
 @media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after,
   ::view-transition-old(root),
   ::view-transition-new(root) {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
+    animation: none !important;
+  }
+
+  .circuit-current,
+  .terminal-caret {
+    animation: none !important;
   }
 
   .btn-interactive:hover,

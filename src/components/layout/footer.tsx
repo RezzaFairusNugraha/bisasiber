@@ -7,24 +7,24 @@ const footerColumns = [
     title: "Platform",
     links: [
       { label: "Modul Belajar", href: "/#jalur-belajar" },
-      { label: "Lab Interaktif", href: "/lab" },
+      { label: "Lab AttackBox", href: "/lab" },
       { label: "Dashboard", href: "/dashboard" },
     ],
   },
   {
-    title: "Sumber Daya",
+    title: "Panduan",
     links: [
       { label: "Dokumentasi Lab", href: "/lab" },
-      { label: "Panduan Pemula", href: "/#jalur-belajar" },
-      { label: "Komunitas", href: "/" },
+      { label: "Jalur Pemula", href: "/#jalur-belajar" },
+      { label: "Komunitas Siber", href: "/" },
     ],
   },
   {
     title: "Kebijakan",
     links: [
-      { label: "Privasi", href: "/" },
+      { label: "Privasi Data", href: "/" },
       { label: "Ketentuan Layanan", href: "/" },
-      { label: "Etika Penggunaan Lab", href: "/lab" },
+      { label: "Etika Lab & Red Team", href: "/lab" },
     ],
   },
 ];
@@ -34,11 +34,11 @@ export function FooterCta() {
     <section className="border-t border-line bg-bg2 px-5 py-16">
       <div className="mx-auto flex max-w-[1200px] flex-col items-start justify-between gap-6 sm:flex-row sm:items-center">
         <div className="max-w-xl">
-          <h2 className="font-heading text-2xl font-bold text-ink sm:text-3xl">
-            Mulai latihan keamanan siber Anda hari ini
+          <h2 className="font-heading text-2xl font-extrabold text-ink sm:text-3xl">
+            Siap menguji pertahanan jaringan pertama Anda?
           </h2>
-          <p className="mt-2 text-base text-mute">
-            Akses langsung seluruh modul dasar dan mesin virtual lab di browser secara gratis.
+          <p className="mt-2 text-base leading-relaxed text-mute">
+            Buka modul dasar gratis dan jalankan AttackBox langsung di browser tanpa konfigurasi tambahan.
           </p>
         </div>
 
@@ -47,7 +47,7 @@ export function FooterCta() {
             Buat Akun Gratis
           </Button>
           <Button variant="outline" size="lg" href="/masuk">
-            Masuk
+            Masuk ke Akun
           </Button>
         </div>
       </div>
@@ -63,22 +63,22 @@ export function Footer() {
           <div className="flex flex-col gap-3">
             <BrandLogo size="md" />
             <p className="max-w-xs text-sm leading-relaxed text-mute">
-              Platform pembelajaran keamanan siber dan laboratorium jaringan interaktif berbahasa Indonesia.
+              Platform belajar keamanan siber dan laboratorium Linux interaktif berbahasa Indonesia.
             </p>
           </div>
 
           <div className="grid grid-cols-2 gap-8 sm:grid-cols-3 sm:gap-14">
             {footerColumns.map((col) => (
-              <div key={col.title} className="flex flex-col gap-3">
-                <h3 className="font-heading text-sm font-semibold text-ink">
+              <div key={col.title} className="flex flex-col gap-2">
+                <h3 className="font-heading text-sm font-bold text-ink">
                   {col.title}
                 </h3>
-                <ul className="flex flex-col gap-2">
+                <ul className="flex flex-col gap-1">
                   {col.links.map((item) => (
                     <li key={item.label}>
                       <Link
                         href={item.href}
-                        className="text-sm text-mute transition-colors hover:text-ink"
+                        className="inline-flex min-h-9 items-center text-sm text-mute transition-colors hover:text-ink"
                       >
                         {item.label}
                       </Link>
@@ -97,7 +97,7 @@ export function Footer() {
               <Link
                 key={social}
                 href="/"
-                className="transition-colors hover:text-ink"
+                className="inline-flex min-h-9 items-center transition-colors hover:text-ink"
               >
                 {social}
               </Link>

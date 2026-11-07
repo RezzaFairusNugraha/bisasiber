@@ -9,7 +9,7 @@ interface ParticleNode {
   vy: number;
   radius: number;
   isRed: boolean;
-  hasHalo: boolean;
+  hasRing: boolean;
 }
 
 export function NetworkPlexusCanvas() {
@@ -36,7 +36,7 @@ export function NetworkPlexusCanvas() {
       if (!canvas) return;
       const rect = canvas.getBoundingClientRect();
       width = rect.width || window.innerWidth;
-      height = rect.height || 560;
+      height = rect.height || 520;
 
       const dpr = Math.min(window.devicePixelRatio || 1, 2);
       canvas.width = width * dpr;
@@ -44,8 +44,8 @@ export function NetworkPlexusCanvas() {
       ctx?.setTransform(dpr, 0, 0, dpr, 0, 0);
 
       const targetCount = Math.min(
-        48,
-        Math.max(24, Math.floor((width * height) / 22000))
+        34,
+        Math.max(18, Math.floor((width * height) / 30000))
       );
 
       nodes.length = 0;
@@ -53,11 +53,11 @@ export function NetworkPlexusCanvas() {
         nodes.push({
           x: Math.random() * width,
           y: Math.random() * height,
-          vx: (Math.random() - 0.5) * 0.28,
-          vy: (Math.random() - 0.5) * 0.28,
-          radius: 2.6 + Math.random() * 2.2,
-          isRed: i % 3 === 0,
-          hasHalo: i % 5 === 0,
+          vx: (Math.random() - 0.5) * 0.2,
+          vy: (Math.random() - 0.5) * 0.2,
+          radius: 2.2 + Math.random() * 1.4,
+          isRed: i % 4 === 0,
+          hasRing: i % 6 === 0,
         });
       }
     }
@@ -70,7 +70,7 @@ export function NetworkPlexusCanvas() {
 
     window.addEventListener("resize", handleResize);
 
-    const maxDist = 165;
+    const maxDist = 155;
 
     function render() {
       if (!ctx) return;
@@ -78,8 +78,9 @@ export function NetworkPlexusCanvas() {
       const isDark =
         document.documentElement.getAttribute("data-theme") === "dark";
 
-      const redRgb = isDark ? "255, 58, 62" : "229, 53, 53";
-      const blueRgb = isDark ? "78, 138, 255" : "59, 118, 246";
+      // Warm-tinted neutrals and disciplined brand red (no blue/purple)
+      const redRgb = isDark ? "255, 42, 46" : "253, 0, 2";
+      const warmNeutralRgb = isDark ? "176, 156, 162" : "107, 90, 96";
 
       ctx.clearRect(0, 0, width, height);
 
@@ -104,48 +105,35 @@ export function NetworkPlexusCanvas() {
 
           if (dist < maxDist) {
             const proximity = 1 - dist / maxDist;
-            const useRed =
-              a.isRed && b.isRed
-                ? true
-                : a.isRed || b.isRed
-                ? (i + j) % 2 === 0
-                : false;
-            const rgb = useRed ? redRgb : blueRgb;
+            const useRed = a.isRed && b.isRed;
+            const rgb = useRed ? redRgb : warmNeutralRgb;
+            const alpha = useRed ? proximity * 0.24 : proximity * 0.14;
 
             ctx.beginPath();
             ctx.moveTo(a.x, a.y);
             ctx.lineTo(b.x, b.y);
-            ctx.strokeStyle = `rgba(${rgb}, ${(proximity * 0.28).toFixed(3)})`;
-            ctx.lineWidth = proximity > 0.7 ? 1.4 : 0.9;
+            ctx.strokeStyle = `rgba(${rgb}, ${alpha.toFixed(3)})`;
+            ctx.lineWidth = useRed ? 1.15 : 0.85;
             ctx.stroke();
-
-            if (dist < 85 && (i + j) % 9 === 0) {
-              ctx.beginPath();
-              ctx.moveTo(a.x, a.y);
-              ctx.lineTo(b.x, b.y);
-              ctx.strokeStyle = `rgba(${rgb}, ${(proximity * 0.11).toFixed(3)})`;
-              ctx.lineWidth = 5;
-              ctx.lineCap = "round";
-              ctx.stroke();
-            }
           }
         }
       }
 
       for (let i = 0; i < nodes.length; i++) {
         const n = nodes[i];
-        const rgb = n.isRed ? redRgb : blueRgb;
+        const rgb = n.isRed ? redRgb : warmNeutralRgb;
 
-        if (n.hasHalo) {
+        if (n.hasRing) {
           ctx.beginPath();
-          ctx.arc(n.x, n.y, n.radius * 2.1, 0, Math.PI * 2);
-          ctx.fillStyle = `rgba(${rgb}, 0.16)`;
-          ctx.fill();
+          ctx.arc(n.x, n.y, n.radius * 2.2, 0, Math.PI * 2);
+          ctx.strokeStyle = `rgba(${rgb}, ${n.isRed ? 0.35 : 0.22})`;
+          ctx.lineWidth = 1;
+          ctx.stroke();
         }
 
         ctx.beginPath();
         ctx.arc(n.x, n.y, n.radius, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(${rgb}, 0.78)`;
+        ctx.fillStyle = `rgba(${rgb}, ${n.isRed ? 0.72 : 0.42})`;
         ctx.fill();
       }
 

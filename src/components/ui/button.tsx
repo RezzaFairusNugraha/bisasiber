@@ -24,20 +24,20 @@ export type ButtonProps = ButtonAsButton | ButtonAsLink;
 
 const variantClasses: Record<ButtonVariant, string> = {
   primary:
-    "border border-btn bg-btn text-onred hover:bg-red2 hover:border-red2 font-medium shadow-xs",
+    "border border-btn bg-btn text-onred hover:bg-red2 hover:border-red2 font-medium",
   outline:
-    "border border-btn bg-transparent text-ink hover:bg-redsoft",
+    "border border-line bg-card text-ink hover:border-red hover:bg-redsoft",
   secondary:
-    "border border-line bg-bg2 text-ink hover:bg-card",
+    "border border-line bg-bg2 text-ink hover:border-red hover:bg-card",
   ghost: "bg-transparent text-mute hover:text-ink hover:bg-bg2",
   danger:
     "border border-hard bg-hard text-onred hover:bg-red2 font-medium",
 };
 
 const sizeClasses: Record<ButtonSize, string> = {
-  sm: "h-8 px-3 text-sm rounded-[5px]",
-  md: "h-9 px-4 text-base rounded-[5px]",
-  lg: "h-11 px-6 text-base rounded-[6px]",
+  sm: "min-h-11 px-3.5 text-sm rounded-lg",
+  md: "min-h-11 px-4 text-sm sm:text-base rounded-lg",
+  lg: "min-h-12 px-6 text-base rounded-lg",
 };
 
 export function Button(props: ButtonProps) {
@@ -89,7 +89,7 @@ export function GoogleAuthButton({
     <Link
       href={href}
       className={cn(
-        "btn-interactive inline-flex h-[38px] items-center justify-center gap-2.5 rounded-[5px] border border-line bg-bg2 px-5 font-heading text-base text-ink hover:border-red hover:bg-card shadow-xs",
+        "btn-interactive inline-flex min-h-11 items-center justify-center gap-2.5 rounded-lg border border-line bg-bg2 px-5 font-heading text-sm font-medium text-ink hover:border-red hover:bg-card",
         className
       )}
     >
@@ -113,7 +113,7 @@ export function GoogleAuthButton({
           fill="#4CAF50"
         />
         <path
-          d="M15.844 6.433H15.2V6.4H8v3.2h4.521a4.8 4.8 0 0 1-1.635 2.228l2.478 2.095C13.188 14.082 16 12 16 8c0-.537-.055-1.06-.156-1.567z"
+          d="M15.844 6.433H15.2V6.4H8v3.2h4.521a4.8 4.8 0 0 1-1.635 2.228l2.478 2.095C13.188 14.082 16 12 16 8c0-.537-.055-1.06-.156-1.067z"
           fill="#1976D2"
         />
       </svg>

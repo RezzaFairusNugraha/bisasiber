@@ -31,7 +31,11 @@ export async function POST(request: NextRequest) {
     const { taskId, flag } = body;
     if (!taskId || !flag) {
       return NextResponse.json(
-        { success: false, message: "ID tugas dan flag wajib diisi." },
+        {
+          success: false,
+          message:
+            "Format Flag belum lengkap. Masukkan nilai BISA{...} dari terminal lalu klik Kirim Flag.",
+        },
         { status: 400 }
       );
     }
@@ -39,7 +43,11 @@ export async function POST(request: NextRequest) {
     const task = INITIAL_TASKS.find((t) => t.id === taskId);
     if (!task) {
       return NextResponse.json(
-        { success: false, message: "Tugas tidak ditemukan." },
+        {
+          success: false,
+          message:
+            "Tugas tidak ditemukan. Muat ulang halaman lab lalu kirim ulang Flag Anda.",
+        },
         { status: 404 }
       );
     }
@@ -52,7 +60,7 @@ export async function POST(request: NextRequest) {
         {
           success: false,
           message:
-            "Flag belum tepat. Periksa kembali petunjuk atau output terminal Anda.",
+            "Flag belum cocok. Periksa kembali penulisan BISA{...} pada output terminal atau buka Petunjuk.",
         },
         { status: 200 }
       );
@@ -62,13 +70,17 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json({
       success: true,
-      message: `Selamat! Flag benar (+${task.points} Poin Siber).`,
+      message: `Flag valid! Tugas selesai dan akun Anda menerima +${task.points} XP.`,
       completedTaskIds: Array.from(completedTaskIds),
       pointsEarned: task.points,
     });
   } catch {
     return NextResponse.json(
-      { success: false, message: "Terjadi kesalahan saat memvalidasi flag." },
+      {
+        success: false,
+        message:
+          "Server gagal memvalidasi Flag. Periksa koneksi jaringan Anda lalu coba kirim sekali lagi.",
+      },
       { status: 500 }
     );
   }
