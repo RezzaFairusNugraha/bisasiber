@@ -4,8 +4,10 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
   IconBook2,
+  IconFlame,
   IconLayoutDashboard,
   IconLogout,
+  IconShieldBolt,
   IconTerminal2,
 } from "@tabler/icons-react";
 import { BrandLogo } from "@/components/ui/brand-logo";
@@ -44,15 +46,23 @@ export function Sidebar() {
           <ThemeToggle />
         </div>
 
-        <div className="border-y border-line py-3.5">
-          <p className="truncate font-heading text-sm font-bold text-ink">
-            {user?.fullName ?? "Pratama Siber"}
-          </p>
-          <div className="mt-1 flex items-center justify-between gap-2 text-xs text-mute">
-            <span className="truncate">
-              {user?.rankTitle ?? "Cyber Defender Lv. 4"}
+        <div className="violet-rim rounded-2xl border border-line bg-card p-3.5">
+          <div className="flex items-center justify-between gap-2">
+            <p className="truncate font-heading text-sm font-bold text-ink">
+              {user?.fullName ?? "Pratama Siber"}
+            </p>
+            <span className="inline-flex items-center gap-1 rounded-full border border-line bg-bg2 px-2 py-0.5 font-mono text-[11px] font-bold text-mid">
+              <IconFlame size={12} stroke={2} className="streak-flame text-mid" />
+              {user?.streakDays ?? 12}
             </span>
-            <span className="tabular-nums shrink-0 font-heading font-bold text-btn">
+          </div>
+
+          <div className="mt-2 flex items-center justify-between gap-2 text-xs">
+            <span className="inline-flex items-center gap-1 truncate rounded-full bg-redsoft px-2.5 py-0.5 font-heading text-[11px] font-semibold text-btn">
+              <IconShieldBolt size={12} stroke={2} />
+              {user?.rankTitle ?? "SOC Specialist"}
+            </span>
+            <span className="tabular-nums shrink-0 font-mono text-xs font-bold text-ok">
               {user?.points ?? 450} XP
             </span>
           </div>
@@ -69,8 +79,8 @@ export function Sidebar() {
                     className={cn(
                       "flex min-h-11 items-center gap-2.5 rounded-lg px-3.5 font-heading text-sm transition-colors",
                       isActive
-                        ? "bg-btn font-medium text-onred"
-                        : "text-mute hover:bg-bg hover:text-ink"
+                        ? "bg-btn font-semibold text-onred"
+                        : "text-mute hover:bg-card hover:text-ink"
                     )}
                   >
                     <Icon size={18} stroke={1.75} />
@@ -86,7 +96,7 @@ export function Sidebar() {
       <div className="mt-6 hidden border-t border-line pt-4 lg:block">
         <Link
           href="/"
-          className="flex min-h-11 items-center gap-2 rounded-lg px-3.5 font-heading text-xs font-medium text-mute transition-colors hover:bg-bg hover:text-ink"
+          className="flex min-h-11 items-center gap-2 rounded-lg px-3.5 font-heading text-xs font-medium text-mute transition-colors hover:bg-card hover:text-ink"
         >
           <IconLogout size={16} stroke={1.75} />
           <span>Kembali ke Beranda</span>

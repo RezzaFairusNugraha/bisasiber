@@ -1,46 +1,115 @@
 @import "tailwindcss";
 
-:root {
-  --bg: #FFFFFF;
-  --bg2: #FFF5F5;
-  --ink: #1D1115;
-  --mute: #6B5A60;
-  --line: #F0DCDC;
-  --red: #FD0002;
-  --btn: #E50002;
-  --red2: #BF0002;
-  --redsoft: #FFE8E8;
-  --onred: #FFFFFF;
-  --card: #FFFFFF;
-  --term: #1D1115;
-  --termfg: #F6E9EB;
-  --ok: #1E8A4C;
-  --mid: #D98200;
-  --hard: #FD0002;
+:root,
+:root[data-theme="light"] {
+  /* Latar Belakang & Permukaan (The Soft Lavender Slate World) */
+  --bg-canvas: #f8f9fe;
+  --bg-surface: #ffffff;
+  --bg-card: #f1f3fb;
+  --bg-card-hover: #e8ebf7;
+  --bg-input: #ffffff;
+
+  /* Garis Batas & Pembagi (Violet Tints) */
+  --border-subtle: rgba(124, 58, 237, 0.14);
+  --border-focus: #7c3aed;
+  --border-elevated: rgba(124, 58, 237, 0.26);
+
+  /* Aksen Utama & Semantik (The Purple Synthesis) */
+  --accent-primary: #7c3aed;
+  --accent-primary-hover: #6d28d9;
+  --accent-primary-glow: rgba(124, 58, 237, 0.16);
+  --accent-iris: #9333ea;
+
+  --accent-mint: #05d580;
+  --accent-mint-ink: #042f1e;
+  --accent-mint-text: #047857;
+  --accent-mint-glow: rgba(5, 213, 128, 0.18);
+
+  --accent-warning: #d97706;
+  --accent-danger: #e11d48;
+  --accent-info: #0284c7;
+
+  /* Tipografi */
+  --text-main: #0f172a;
+  --text-muted: #475569;
+  --text-dim: #64748b;
+  --text-inverse: #ffffff;
+
+  /* Semantic Aliases for Tailwind Utilities */
+  --bg: var(--bg-canvas);
+  --bg2: var(--bg-surface);
+  --card: var(--bg-card);
+  --ink: var(--text-main);
+  --mute: var(--text-muted);
+  --line: var(--border-subtle);
+  --red: var(--accent-primary);
+  --btn: var(--accent-primary);
+  --red2: var(--accent-primary-hover);
+  --redsoft: rgba(124, 58, 237, 0.1);
+  --onred: var(--text-inverse);
+  --term: #0d1024;
+  --termfg: #f1f5f9;
+  --ok: var(--accent-mint-text);
+  --mid: var(--accent-warning);
+  --hard: var(--accent-danger);
 }
 
-[data-theme="dark"] {
-  --bg: #150C10;
-  --bg2: #1D1217;
-  --ink: #F7ECEE;
-  --mute: #B09CA2;
-  --line: #35222A;
-  --red: #FF2A2E;
-  --btn: #FF2A2E;
-  --red2: #FF5558;
-  --redsoft: #3A1014;
-  --onred: #1B0A0F;
-  --card: #1D1217;
-  --term: #0C0609;
-  --termfg: #F6E9EB;
-  --ok: #4FD38A;
-  --mid: #FFB23E;
-  --hard: #FF2A2E;
+:root[data-theme="dark"] {
+  /* Latar Belakang & Permukaan (Default — The Purple Obsidian World) */
+  --bg-canvas: #0b0d17;
+  --bg-surface: #111528;
+  --bg-card: #181e38;
+  --bg-card-hover: #21294c;
+  --bg-input: #0e1222;
+
+  /* Garis Batas & Pembagi (Violet Tints) */
+  --border-subtle: rgba(139, 92, 246, 0.14);
+  --border-focus: #8b5cf6;
+  --border-elevated: rgba(139, 92, 246, 0.28);
+
+  /* Aksen Utama & Semantik (The Purple Synthesis) */
+  --accent-primary: #8b5cf6;
+  --accent-primary-hover: #7c3aed;
+  --accent-primary-glow: rgba(139, 92, 246, 0.25);
+  --accent-iris: #a855f7;
+
+  --accent-mint: #10f098;
+  --accent-mint-ink: #052e1c;
+  --accent-mint-text: #10f098;
+  --accent-mint-glow: rgba(16, 240, 152, 0.22);
+
+  --accent-warning: #f59e0b;
+  --accent-danger: #f43f5e;
+  --accent-info: #38bdf8;
+
+  /* Tipografi */
+  --text-main: #f1f5f9;
+  --text-muted: #94a3b8;
+  --text-dim: #64748b;
+  --text-inverse: #ffffff;
+
+  /* Semantic Aliases for Tailwind Utilities */
+  --bg: var(--bg-canvas);
+  --bg2: var(--bg-surface);
+  --card: var(--bg-card);
+  --ink: var(--text-main);
+  --mute: var(--text-muted);
+  --line: var(--border-subtle);
+  --red: var(--accent-primary);
+  --btn: var(--accent-primary);
+  --red2: var(--accent-primary-hover);
+  --redsoft: rgba(139, 92, 246, 0.14);
+  --onred: var(--text-inverse);
+  --term: #0d1024;
+  --termfg: #f1f5f9;
+  --ok: var(--accent-mint-text);
+  --mid: var(--accent-warning);
+  --hard: var(--accent-danger);
 }
 
 @theme inline {
-  --font-heading: "Bricolage Grotesque", sans-serif;
-  --font-sans: "Instrument Sans", sans-serif;
+  --font-heading: "Plus Jakarta Sans", "Bricolage Grotesque", sans-serif;
+  --font-sans: "Source Sans 3", "Instrument Sans", sans-serif;
   --font-mono: "JetBrains Mono", monospace;
 
   --color-bg: var(--bg);
@@ -62,17 +131,17 @@
 }
 
 ::selection {
-  background-color: var(--redsoft);
-  color: var(--ink);
+  background-color: var(--accent-primary-glow);
+  color: var(--text-main);
 }
 
 body {
-  background-color: var(--bg);
-  color: var(--ink);
+  background-color: var(--bg-canvas);
+  color: var(--text-main);
   font-family: var(--font-sans);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
-  caret-color: var(--red);
+  caret-color: var(--accent-primary);
 }
 
 h1,
@@ -84,11 +153,11 @@ h4 {
 }
 
 h1 {
-  letter-spacing: -0.028em;
+  letter-spacing: -0.025em;
 }
 
 h2 {
-  letter-spacing: -0.02em;
+  letter-spacing: -0.018em;
 }
 
 h3 {
@@ -104,7 +173,7 @@ p {
   font-variant-numeric: tabular-nums;
 }
 
-/* Purposeful, responsive UI transitions */
+/* Purposeful UI transitions per DESIGN.md Section 6 */
 body,
 header,
 aside,
@@ -116,18 +185,23 @@ button,
 a,
 input {
   transition:
-    background-color 220ms cubic-bezier(0.2, 0.9, 0.3, 1),
-    border-color 220ms cubic-bezier(0.2, 0.9, 0.3, 1),
-    color 180ms cubic-bezier(0.2, 0.9, 0.3, 1),
-    box-shadow 240ms cubic-bezier(0.2, 0.9, 0.3, 1),
-    transform 200ms cubic-bezier(0.2, 0.9, 0.3, 1),
-    opacity 200ms cubic-bezier(0.2, 0.9, 0.3, 1);
+    background-color 180ms cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 180ms cubic-bezier(0.16, 1, 0.3, 1),
+    color 150ms ease-out,
+    box-shadow 200ms cubic-bezier(0.16, 1, 0.3, 1),
+    transform 200ms cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 180ms ease-out;
 }
 
-/* Visible 3px red keyboard focus ring */
+/* Accessible Focus-Visible Ring (Electric Cyber Violet) */
 :focus-visible {
-  outline: 3px solid var(--red) !important;
+  outline: 2.5px solid var(--border-focus) !important;
   outline-offset: 2px;
+}
+
+/* Violet Rim Lighting (DESIGN.md Section 2.1) */
+.violet-rim {
+  box-shadow: inset 0 1px 0 0 rgba(139, 92, 246, 0.22);
 }
 
 /* View Transition Circle Expand from click point */
@@ -138,7 +212,7 @@ input {
 }
 
 ::view-transition-new(root) {
-  animation: theme-circle-expand 650ms cubic-bezier(0.2, 0.9, 0.3, 1) forwards;
+  animation: theme-circle-expand 600ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 @keyframes theme-circle-expand {
@@ -152,52 +226,90 @@ input {
 
 /* Tactile button hover & press feedback */
 .btn-interactive:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 10px 20px -12px color-mix(in srgb, var(--red) 45%, transparent);
+  transform: translateY(-1.5px);
+  box-shadow: 0 10px 24px -8px var(--accent-primary-glow);
 }
 
 .btn-interactive:active {
   transform: scale(0.98);
 }
 
-/* Card hover feedback */
+/* Luminous Cyber Mint execution button (DESIGN.md Section 5.2) */
+.btn-mint {
+  background-color: var(--accent-mint);
+  color: var(--accent-mint-ink);
+  border: 1px solid var(--accent-mint);
+  font-weight: 700;
+}
+
+.btn-mint:hover {
+  filter: brightness(1.06);
+  transform: translateY(-1.5px);
+  box-shadow: 0 10px 24px -6px var(--accent-mint-glow);
+}
+
+/* Room Card hover micro-interaction (DESIGN.md Section 5.1: -3px lift + violet glow) */
+.card-interactive {
+  box-shadow: inset 0 1px 0 0 rgba(139, 92, 246, 0.2);
+}
+
 .card-interactive:hover {
-  transform: translateY(-4px);
-  border-color: var(--red) !important;
-  box-shadow: 0 18px 34px -22px color-mix(in srgb, var(--red) 35%, transparent);
+  transform: translateY(-3px);
+  background-color: var(--bg-card-hover);
+  border-color: var(--border-elevated) !important;
+  box-shadow:
+    inset 0 1px 0 0 rgba(139, 92, 246, 0.35),
+    0 12px 30px -6px var(--accent-primary-glow);
 }
 
 /* Terminal command chips */
 .cmd-chip:hover {
   transform: translateY(-1px);
-  background-color: var(--btn) !important;
-  border-color: var(--btn) !important;
-  color: var(--onred) !important;
+  background-color: var(--accent-primary) !important;
+  border-color: var(--accent-primary) !important;
+  color: var(--text-inverse) !important;
 }
 
-/* Logo red layer with subtle sweep */
+/* Logo Electric Cyber Violet mask layer */
 .logo-red-shine {
-  background-color: var(--red);
-  transition: background-color 240ms cubic-bezier(0.2, 0.9, 0.3, 1);
+  background: linear-gradient(135deg, var(--accent-primary), var(--accent-iris));
+  transition: background 220ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Living Streak Flame subtle breathing pulse (DESIGN.md Section 2.2) */
+.streak-flame {
+  animation: flame-pulse 2.6s ease-in-out infinite;
+}
+
+@keyframes flame-pulse {
+  0%,
+  100% {
+    transform: scale(1);
+    filter: drop-shadow(0 0 4px rgba(245, 158, 11, 0.35));
+  }
+  50% {
+    transform: scale(1.08);
+    filter: drop-shadow(0 0 8px rgba(245, 158, 11, 0.65));
+  }
 }
 
 /* Subtle circuit trace current flow */
 .circuit-current {
-  stroke-dasharray: 18 240;
-  stroke-dashoffset: 258;
-  animation: circuit-flow 6s cubic-bezier(0.2, 0.9, 0.3, 1) infinite;
+  stroke-dasharray: 22 240;
+  stroke-dashoffset: 262;
+  animation: circuit-flow 6s cubic-bezier(0.16, 1, 0.3, 1) infinite;
 }
 
 @keyframes circuit-flow {
   0% {
-    stroke-dashoffset: 258;
+    stroke-dashoffset: 262;
     opacity: 0;
   }
   20% {
-    opacity: 0.85;
+    opacity: 0.9;
   }
   75% {
-    opacity: 0.85;
+    opacity: 0.9;
   }
   100% {
     stroke-dashoffset: 0;
@@ -211,7 +323,7 @@ input {
   width: 6px;
   height: 13px;
   vertical-align: middle;
-  background-color: var(--red);
+  background-color: var(--accent-mint);
   animation: caret-blink 1s steps(2, start) infinite;
 }
 
@@ -221,7 +333,7 @@ input {
   }
 }
 
-/* Respect prefers-reduced-motion: remove spatial motion, preserve opacity/color feedback */
+/* Respect prefers-reduced-motion (DESIGN.md Section 6.2) */
 @media (prefers-reduced-motion: reduce) {
   ::view-transition-old(root),
   ::view-transition-new(root) {
@@ -229,12 +341,14 @@ input {
   }
 
   .circuit-current,
-  .terminal-caret {
+  .terminal-caret,
+  .streak-flame {
     animation: none !important;
   }
 
   .btn-interactive:hover,
   .btn-interactive:active,
+  .btn-mint:hover,
   .card-interactive:hover,
   .cmd-chip:hover {
     transform: none !important;
@@ -251,10 +365,10 @@ input {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: color-mix(in srgb, var(--mute) 30%, transparent);
-  border-radius: 3px;
+  background: color-mix(in srgb, var(--accent-primary) 35%, transparent);
+  border-radius: 9999px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: color-mix(in srgb, var(--mute) 50%, transparent);
+  background: color-mix(in srgb, var(--accent-primary) 55%, transparent);
 }

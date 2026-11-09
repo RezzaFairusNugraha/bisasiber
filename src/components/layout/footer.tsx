@@ -12,11 +12,11 @@ const footerColumns = [
     ],
   },
   {
-    title: "Panduan",
+    title: "Jalur Siber",
     links: [
-      { label: "Dokumentasi Lab", href: "/lab" },
-      { label: "Jalur Pemula", href: "/#jalur-belajar" },
-      { label: "Komunitas Siber", href: "/" },
+      { label: "Red Team (Ofensif)", href: "/#jalur-belajar" },
+      { label: "Blue Team (Defensif SOC)", href: "/#jalur-belajar" },
+      { label: "Purple Team Synthesis", href: "/lab" },
     ],
   },
   {
@@ -24,7 +24,7 @@ const footerColumns = [
     links: [
       { label: "Privasi Data", href: "/" },
       { label: "Ketentuan Layanan", href: "/" },
-      { label: "Etika Lab & Red Team", href: "/lab" },
+      { label: "Etika Lab & Keamanan", href: "/lab" },
     ],
   },
 ];
@@ -32,22 +32,25 @@ const footerColumns = [
 export function FooterCta() {
   return (
     <section className="border-t border-line bg-bg2 px-5 py-16">
-      <div className="mx-auto flex max-w-[1200px] flex-col items-start justify-between gap-6 sm:flex-row sm:items-center">
+      <div className="mx-auto flex max-w-[1360px] flex-col items-start justify-between gap-6 sm:flex-row sm:items-center">
         <div className="max-w-xl">
-          <h2 className="font-heading text-2xl font-extrabold text-ink sm:text-3xl">
-            Siap menguji pertahanan jaringan pertama Anda?
+          <span className="inline-flex items-center gap-2 rounded-full border border-line bg-card px-3 py-1 font-heading text-xs font-semibold text-btn">
+            Red Team + Blue Team = Purple Synthesis
+          </span>
+          <h2 className="mt-3 font-heading text-2xl font-bold text-ink sm:text-3xl">
+            Siap menguji serangan dan pertahanan jaringan pertama Anda?
           </h2>
           <p className="mt-2 text-base leading-relaxed text-mute">
-            Buka modul dasar gratis dan jalankan AttackBox langsung di browser tanpa konfigurasi tambahan.
+            Mulai dari nol tanpa instalasi rumit. Jalankan lingkungan lab siber interaktif langsung dari peramban Anda.
           </p>
         </div>
 
         <div className="flex flex-wrap items-center gap-3">
           <Button variant="primary" size="lg" href="/daftar">
-            Buat Akun Gratis
+            Mulai Jelajahi Minatmu — Gratis
           </Button>
-          <Button variant="outline" size="lg" href="/masuk">
-            Masuk ke Akun
+          <Button variant="outline" size="lg" href="/lab">
+            Coba Lab Pertama (Tanpa Install)
           </Button>
         </div>
       </div>
@@ -58,12 +61,12 @@ export function FooterCta() {
 export function Footer() {
   return (
     <footer className="border-t border-line bg-bg px-5 py-12 text-ink">
-      <div className="mx-auto flex max-w-[1200px] flex-col gap-10">
+      <div className="mx-auto flex max-w-[1360px] flex-col gap-10">
         <div className="flex flex-col justify-between gap-10 md:flex-row">
           <div className="flex flex-col gap-3">
             <BrandLogo size="md" />
             <p className="max-w-xs text-sm leading-relaxed text-mute">
-              Platform belajar keamanan siber dan laboratorium Linux interaktif berbahasa Indonesia.
+              Platform belajar keamanan siber holistik berbahasa Indonesia — memadukan ketajaman Red Team dan ketangguhan Blue Team.
             </p>
           </div>
 
@@ -91,7 +94,7 @@ export function Footer() {
         </div>
 
         <div className="flex flex-col items-start justify-between gap-4 border-t border-line pt-6 text-xs text-mute sm:flex-row sm:items-center">
-          <p>© {new Date().getFullYear()} BisaSiber Indonesia.</p>
+          <p>© {new Date().getFullYear()} BisaSiber Indonesia — The Purple Synthesis Edition.</p>
           <div className="flex items-center gap-5">
             {["GitHub", "LinkedIn", "Discord"].map((social) => (
               <Link

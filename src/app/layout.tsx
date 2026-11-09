@@ -1,11 +1,12 @@
 import type { Metadata, Viewport } from "next";
-import "@fontsource/bricolage-grotesque/500.css";
-import "@fontsource/bricolage-grotesque/700.css";
-import "@fontsource/bricolage-grotesque/800.css";
-import "@fontsource/instrument-sans/400.css";
-import "@fontsource/instrument-sans/500.css";
-import "@fontsource/instrument-sans/600.css";
+import "@fontsource/plus-jakarta-sans/600.css";
+import "@fontsource/plus-jakarta-sans/700.css";
+import "@fontsource/plus-jakarta-sans/800.css";
+import "@fontsource/source-sans-3/400.css";
+import "@fontsource/source-sans-3/500.css";
+import "@fontsource/source-sans-3/600.css";
 import "@fontsource/jetbrains-mono/400.css";
+import "@fontsource/jetbrains-mono/500.css";
 import "@fontsource/jetbrains-mono/600.css";
 import { QueryProvider } from "@/providers/query-provider";
 import { ThemeProvider } from "@/providers/theme-provider";
@@ -13,8 +14,8 @@ import "./globals.css";
 
 export const viewport: Viewport = {
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#FFFFFF" },
-    { media: "(prefers-color-scheme: dark)", color: "#150C10" },
+    { media: "(prefers-color-scheme: light)", color: "#F8F9FE" },
+    { media: "(prefers-color-scheme: dark)", color: "#0B0D17" },
   ],
   width: "device-width",
   initialScale: 1,
@@ -25,16 +26,16 @@ export const metadata: Metadata = {
     process.env.NEXT_PUBLIC_APP_URL || "https://bisasiber.id"
   ),
   title: {
-    default: "BisaSiber | Platform Belajar Teknologi & Siber Interaktif",
+    default: "BisaSiber | Platform Belajar Keamanan Siber Purple Team Interaktif",
     template: "%s | BisaSiber",
   },
   description:
-    "Platform belajar teknologi dan keamanan siber interaktif #1 di Indonesia. Kuasai Penetration Testing, SOC Analysis, Cloud Security, dan AI Security melalui lab skenario dunia nyata langsung di browser Anda.",
+    "Platform belajar keamanan siber interaktif di Indonesia dengan filosofi The Purple Synthesis (Red Team + Blue Team). Kuasai Penetration Testing, SOC Analysis, Cloud Security, dan AI Security langsung di browser.",
   keywords: [
     "BisaSiber",
     "belajar keamanan siber",
-    "cyber security indonesia",
-    "ethical hacking indonesia",
+    "purple team indonesia",
+    "red team blue team",
     "penetration testing",
     "SOC analyst",
     "capture the flag",
@@ -56,23 +57,23 @@ export const metadata: Metadata = {
     locale: "id_ID",
     url: "https://bisasiber.id",
     siteName: "BisaSiber",
-    title: "BisaSiber | Platform Belajar Teknologi & Siber Interaktif",
+    title: "BisaSiber | Platform Belajar Keamanan Siber Purple Team Interaktif",
     description:
-      "Pelatihan keamanan siber dan teknologi berbasis praktik langsung (hands-on labs) dari level pemula hingga mahir dalam satu platform terpadu.",
+      "Pelatihan keamanan siber Red Team & Blue Team berbasis praktik langsung (hands-on labs) dari level pemula hingga mahir dalam satu platform terpadu.",
     images: [
       {
         url: "/logo-dark.png",
         width: 1200,
         height: 630,
-        alt: "BisaSiber — Platform Belajar Teknologi & Siber Interaktif",
+        alt: "BisaSiber — The Purple Synthesis Edition",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "BisaSiber | Platform Belajar Teknologi & Siber Interaktif",
+    title: "BisaSiber | Platform Belajar Keamanan Siber Purple Team Interaktif",
     description:
-      "Pelatihan keamanan siber dan teknologi interaktif melalui skenario dunia nyata langsung dari browser Anda.",
+      "Pelatihan keamanan siber interaktif melalui skenario Red Team, Blue Team, dan Purple Team langsung dari browser Anda.",
     images: ["/logo-dark.png"],
   },
 };

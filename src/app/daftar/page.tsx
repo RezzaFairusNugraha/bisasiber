@@ -6,13 +6,13 @@ import { Button, GoogleAuthButton } from "@/components/ui/button";
 export const metadata: Metadata = {
   title: "Daftar Akun Gratis",
   description:
-    "Buat akun gratis di BisaSiber dan mulai pelajari keamanan siber, penetration testing, serta pertahanan jaringan secara interaktif.",
+    "Buat akun gratis di BisaSiber dan mulai pelajari keamanan siber Red Team, Blue Team, dan Purple Team secara interaktif.",
 };
 
 export default function RegisterPage() {
   return (
     <div className="flex min-h-screen flex-col justify-between bg-bg px-5 py-8 text-ink">
-      <div className="mx-auto flex w-full max-w-[1200px] items-center justify-between">
+      <div className="mx-auto flex w-full max-w-[1360px] items-center justify-between">
         <BrandLogo size="md" />
         <Link
           href="/"
@@ -22,12 +22,15 @@ export default function RegisterPage() {
         </Link>
       </div>
 
-      <main className="mx-auto my-12 w-full max-w-sm">
-        <h1 className="font-heading text-2xl font-extrabold text-ink">
+      <main className="violet-rim mx-auto my-12 w-full max-w-md rounded-2xl border border-line bg-bg2 p-7">
+        <span className="inline-flex items-center rounded-full border border-line bg-redsoft px-3 py-0.5 font-heading text-xs font-semibold text-btn">
+          Mulai dari Nol — Gratis
+        </span>
+        <h1 className="mt-3 font-heading text-2xl font-bold text-ink">
           Buat Akun Gratis
         </h1>
         <p className="mt-1.5 text-sm leading-relaxed text-mute">
-          Mulai latihan Penetration Testing, SOC, dan Red Team langsung dari browser Anda.
+          Mulai latihan Penetration Testing (Red Team) dan analisis pertahanan SOC (Blue Team) langsung dari peramban Anda.
         </p>
 
         <div className="mt-6">

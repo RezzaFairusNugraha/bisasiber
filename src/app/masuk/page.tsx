@@ -6,13 +6,13 @@ import { Button, GoogleAuthButton } from "@/components/ui/button";
 export const metadata: Metadata = {
   title: "Masuk ke Akun",
   description:
-    "Masuk ke akun BisaSiber Anda untuk melanjutkan modul keamanan siber dan mengakses mesin virtual lab interaktif.",
+    "Masuk ke akun BisaSiber Anda untuk melanjutkan modul keamanan siber Purple Team dan mengakses mesin virtual lab interaktif.",
 };
 
 export default function LoginPage() {
   return (
     <div className="flex min-h-screen flex-col justify-between bg-bg px-5 py-8 text-ink">
-      <div className="mx-auto flex w-full max-w-[1200px] items-center justify-between">
+      <div className="mx-auto flex w-full max-w-[1360px] items-center justify-between">
         <BrandLogo size="md" />
         <Link
           href="/"
@@ -22,12 +22,15 @@ export default function LoginPage() {
         </Link>
       </div>
 
-      <main className="mx-auto my-12 w-full max-w-sm">
-        <h1 className="font-heading text-2xl font-extrabold text-ink">
+      <main className="violet-rim mx-auto my-12 w-full max-w-md rounded-2xl border border-line bg-bg2 p-7">
+        <span className="inline-flex items-center rounded-full border border-line bg-redsoft px-3 py-0.5 font-heading text-xs font-semibold text-btn">
+          Purple Team Portal
+        </span>
+        <h1 className="mt-3 font-heading text-2xl font-bold text-ink">
           Masuk ke BisaSiber
         </h1>
         <p className="mt-1.5 text-sm leading-relaxed text-mute">
-          Lanjutkan progres modul dan nyalakan kembali sesi AttackBox Anda.
+          Lanjutkan progres modul Red Team &amp; Blue Team serta nyalakan kembali sesi AttackBox Anda.
         </p>
 
         <div className="mt-6">

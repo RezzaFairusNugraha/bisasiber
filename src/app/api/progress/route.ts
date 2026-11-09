@@ -10,9 +10,9 @@ export async function GET() {
       id: 1,
       username: "siber_pejuang",
       fullName: "Pratama Siber",
-      rankTitle: "Cyber Defender Lv. 4",
+      rankTitle: "SOC Specialist",
       points: 450 + (completedTaskIds.size - 1) * 40,
-      streakDays: 7,
+      streakDays: 12,
       completedRooms: 3,
       activeRooms: 4,
     },
@@ -34,7 +34,7 @@ export async function POST(request: NextRequest) {
         {
           success: false,
           message:
-            "Format Flag belum lengkap. Masukkan nilai BISA{...} dari terminal lalu klik Kirim Flag.",
+            "Hmm, kolom jawaban belum lengkap. Masukkan nilai BISA{...} lalu klik Periksa.",
         },
         { status: 400 }
       );
@@ -46,7 +46,7 @@ export async function POST(request: NextRequest) {
         {
           success: false,
           message:
-            "Tugas tidak ditemukan. Muat ulang halaman lab lalu kirim ulang Flag Anda.",
+            "Tugas tidak ditemukan. Muat ulang halaman lab lalu periksa kembali Flag kamu.",
         },
         { status: 404 }
       );
@@ -60,7 +60,7 @@ export async function POST(request: NextRequest) {
         {
           success: false,
           message:
-            "Flag belum cocok. Periksa kembali penulisan BISA{...} pada output terminal atau buka Petunjuk.",
+            "Hmm, flag belum pas nih. Periksa kembali halaman web atau terminal di sebelah kanan, atau intip Petunjuk jika kamu merasa buntu.",
         },
         { status: 200 }
       );
@@ -70,7 +70,7 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json({
       success: true,
-      message: `Flag valid! Tugas selesai dan akun Anda menerima +${task.points} XP.`,
+      message: `Keren! Analisis kamu tepat. +${task.points} XP ditambahkan ke profilmu.`,
       completedTaskIds: Array.from(completedTaskIds),
       pointsEarned: task.points,
     });
@@ -79,7 +79,7 @@ export async function POST(request: NextRequest) {
       {
         success: false,
         message:
-          "Server gagal memvalidasi Flag. Periksa koneksi jaringan Anda lalu coba kirim sekali lagi.",
+          "Koneksi ke server sempat terputus saat memeriksa Flag. Silakan klik Periksa sekali lagi.",
       },
       { status: 500 }
     );
